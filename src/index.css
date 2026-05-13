@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Work+Sans:wght@400;500;600&display=swap');
+
+@theme {
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", sans-serif;
+
+  /* Brand Colors from Design Specs */
+  --color-primary: #00683e;
+  --color-primary-container: #008450;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #ebffee;
+  
+  --color-secondary: #29695b;
+  --color-secondary-container: #acedda;
+  --color-on-secondary-container: #2e6d5f;
+  
+  --color-tertiary: #993f00;
+  --color-tertiary-container: #c05100;
+  --color-on-tertiary: #ffffff;
+  
+  --color-background: #fbf9f1;
+  --color-surface: #fbf9f1;
+  --color-surface-container-low: #f6f4ec;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-highest: #e4e3db;
+  
+  --color-on-surface: #1b1c17;
+  --color-on-surface-variant: #3e4941;
+  
+  --radius-xl: 1.5rem;
+  --radius-lg: 1rem;
+  
+  --spacing-section-gap: 120px;
+  --spacing-gutter: 24px;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+  }
+}
+
+@layer components {
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+  
+  .ambient-shadow {
+    box-shadow: 0 10px 30px -10px rgba(41, 105, 91, 0.08);
+  }
+}
