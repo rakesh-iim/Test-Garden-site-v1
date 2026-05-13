@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
   Menu, 
@@ -19,7 +19,8 @@ import {
   Trees,
   Instagram,
   Facebook,
-  Phone
+  Phone,
+  ArrowUp
 } from 'lucide-react';
 
 const IMAGES = {
@@ -37,25 +38,24 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 h-14 sm:h-16 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <Trees className="text-primary w-8 h-8" />
-          <span className="font-display text-2xl font-bold text-primary tracking-tight">VerdantCraft</span>
+          <img src="/logo.png" alt="MrGardenr Logo" className="h-12 sm:h-14 scale-[2.8] sm:scale-[3.2] origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-2 -translate-x-12 sm:-translate-x-14" />
         </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-8 items-center">
-          {['Services', 'Portfolio', 'About', 'Testimonials'].map((item) => (
+          {['Home', 'About Us', 'Services', 'Testimonials'].map((item) => (
             <a 
               key={item} 
-              href={`#${item.toLowerCase()}`}
+              href={`#${item.toLowerCase().replace(' ', '-')}`}
               className="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors"
             >
               {item}
             </a>
           ))}
           <button className="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover-lift">
-            Get a Quote
+            Book a Visit
           </button>
         </div>
 
@@ -75,10 +75,10 @@ const Navbar = () => {
             className="md:hidden bg-surface border-t border-surface-container-highest overflow-hidden"
           >
             <div className="flex flex-col p-6 gap-4">
-              {['Services', 'Portfolio', 'About', 'Testimonials'].map((item) => (
+              {['Home', 'About Us', 'Services', 'Testimonials'].map((item) => (
                 <a 
                   key={item} 
-                  href={`#${item.toLowerCase()}`}
+                  href={`#${item.toLowerCase().replace(' ', '-')}`}
                   className="text-lg font-semibold text-on-surface"
                   onClick={() => setIsOpen(false)}
                 >
@@ -86,7 +86,7 @@ const Navbar = () => {
                 </a>
               ))}
               <button className="bg-primary-container text-on-primary px-6 py-3 rounded-full font-semibold mt-2">
-                Get a Quote
+                Book a Visit
               </button>
             </div>
           </motion.div>
@@ -97,12 +97,16 @@ const Navbar = () => {
 };
 
 const Hero = () => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, 250]);
+  const ref = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   return (
-  <header className="relative pt-20 overflow-hidden bg-surface-container-low min-h-[90vh] flex items-center">
-    <motion.div style={{ y }} className="absolute inset-0 z-0 scale-110 origin-top">
+  <header ref={ref} className="relative pt-20 overflow-hidden bg-surface-container-low min-h-[90vh] flex items-center">
+    <motion.div style={{ y }} className="absolute inset-0 z-0 scale-[1.2] origin-top">
       <img 
         src={IMAGES.hero} 
         alt="Lush garden" 
@@ -217,9 +221,9 @@ const Expertise = () => {
             )}
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6
                   ${s.theme === 'dark' ? 'bg-white/20' : s.color} ${s.textColor}`}>
-                  <s.icon className="w-6 h-6" />
+                  <s.icon className="w-6 h-6 transform transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-3">{s.title}</h3>
                 <p className={`${s.theme === 'dark' ? 'text-on-primary-container/90' : 'text-on-surface-variant'} mb-6`}>
@@ -259,33 +263,41 @@ const Projects = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            visible: { transition: { staggerChildren: 0.2 } },
+            hidden: {}
+          }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           {items.map((it, i) => (
             <motion.div 
               key={it.title}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
               className={`group cursor-pointer ${it.offset ? 'md:mt-12' : ''}`}
             >
-              <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 ambient-shadow">
+              <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 ambient-shadow bg-black/10">
                 <img 
                   src={it.img} 
                   alt={it.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
-                  <span className="text-white text-xs font-bold bg-primary/80 px-3 py-1 rounded-full backdrop-blur-sm">
-                    {i === 2 ? 'Ongoing' : 'Completed ' + (2023 + i % 2)}
-                  </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                  <h3 className="text-white text-2xl font-display font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{it.title}</h3>
+                  <p className="text-white/80 font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">{it.category}</p>
                 </div>
               </div>
-              <h3 className="text-2xl font-display font-bold mb-2">{it.title}</h3>
+              <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-primary transition-colors duration-300">{it.title}</h3>
               <p className="text-on-surface-variant font-medium">{it.category}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -314,12 +326,15 @@ const TESTIMONIALS = [
 
 const SocialProof = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const nextTestimonial = () => {
+    setDirection(1);
     setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
   };
 
   const prevTestimonial = () => {
+    setDirection(-1);
     setCurrentTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   };
 
@@ -384,13 +399,14 @@ const SocialProof = () => {
             </div>
 
             <div className="relative z-10 min-h-[190px] flex flex-col justify-between">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={currentTestimonial}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
+                  custom={direction}
+                  initial={(d: number) => ({ opacity: 0, x: d > 0 ? 50 : -50, scale: 0.95 })}
+                  animate={{ opacity: 1, x: 0, scale: 1 }}
+                  exit={(d: number) => ({ opacity: 0, x: d > 0 ? -50 : 50, scale: 0.95 })}
+                  transition={{ duration: 0.5, type: 'spring', bounce: 0.3 }}
                   className="flex flex-col h-full justify-between gap-4"
                 >
                   <p className="text-lg italic text-white/90 leading-relaxed">
@@ -594,16 +610,15 @@ const LeadGen = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-surface-container-highest/95 backdrop-blur-md py-4 md:py-6 px-6 sticky bottom-0 z-40 border-t border-black/5 shadow-[0_-4px_25px_rgba(0,0,0,0.1)]">
+  <footer className="bg-surface-container-highest/95 backdrop-blur-md py-4 md:py-6 px-6 border-t border-black/5 shadow-[0_-4px_25px_rgba(0,0,0,0.1)]">
     <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
-        <div className="flex items-center gap-2">
-          <Trees className="text-primary w-6 h-6" />
-          <span className="font-display text-xl font-extrabold text-on-surface tracking-tight hidden sm:block">VerdantCraft</span>
+        <div className="flex items-center gap-2 md:mr-10">
+          <img src="/logo.png" alt="MrGardenr Logo" className="h-12 sm:h-14 scale-[1.8] sm:scale-[2.2] origin-center md:origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-1 -translate-x-1 sm:-translate-x-3" />
         </div>
         <div className="hidden md:block w-px h-6 bg-black/10 mx-2" />
         <p className="text-sm text-on-surface-variant font-medium hidden lg:block">
-          © {new Date().getFullYear()} VerdantCraft Landscaping.
+          © {new Date().getFullYear()} MrGardenr.
         </p>
       </div>
 
@@ -631,6 +646,47 @@ const Footer = () => (
   </footer>
 );
 
+const BackToTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, y: 20, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.8 }}
+          onClick={scrollToTop}
+          className="fixed bottom-24 right-8 md:bottom-28 md:right-12 p-3 bg-primary-container/70 backdrop-blur-md text-on-primary border border-white/20 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 hover:bg-primary-container/90 transition-all duration-300 z-50 group flex items-center justify-center cursor-pointer"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+};
+
 export default function App() {
   return (
     <div className="selection:bg-primary-container selection:text-white">
@@ -643,6 +699,7 @@ export default function App() {
         <LeadGen />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }
