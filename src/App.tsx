@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
   Menu, 
   X, 
@@ -15,6 +15,7 @@ import {
   Leaf, 
   CheckCircle2, 
   ChevronRight,
+  ChevronLeft,
   Trees,
   Instagram,
   Facebook,
@@ -95,16 +96,20 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => (
+const Hero = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 1000], [0, 250]);
+
+  return (
   <header className="relative pt-20 overflow-hidden bg-surface-container-low min-h-[90vh] flex items-center">
-    <div className="absolute inset-0 z-0">
+    <motion.div style={{ y }} className="absolute inset-0 z-0 scale-110 origin-top">
       <img 
         src={IMAGES.hero} 
         alt="Lush garden" 
         className="w-full h-full object-cover opacity-80 mix-blend-multiply"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent" />
-    </div>
+    </motion.div>
 
     <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
       <motion.div 
@@ -136,7 +141,8 @@ const Hero = () => (
       </motion.div>
     </div>
   </header>
-);
+  );
+};
 
 const Expertise = () => {
   const services = [
@@ -176,25 +182,31 @@ const Expertise = () => {
 
   return (
     <section id="services" className="py-24 max-w-7xl mx-auto px-6">
-      <div className="text-center mb-16">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        className="text-center mb-16"
+      >
         <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Our Expertise</h2>
         <p className="text-lg text-on-surface-variant max-w-2xl mx-auto">
           Comprehensive landscaping solutions designed to cultivate vibrant, healthy, and structurally sound environments.
         </p>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {services.map((s, i) => (
           <motion.div 
             key={s.title}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
+            whileHover={{ y: -8, scale: 1.02 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
             className={`
               ${s.large ? 'md:col-span-8' : i === 1 ? 'md:col-span-4' : 'md:col-span-6'}
-              rounded-2xl p-8 ambient-shadow hover-lift relative overflow-hidden group
-              ${s.theme === 'dark' ? 'bg-primary-container text-white' : 'bg-surface-container-lowest text-on-surface'}
+              rounded-2xl p-8 ambient-shadow relative overflow-hidden group transition-colors duration-500
+              ${s.theme === 'dark' ? 'bg-primary-container hover:bg-primary text-white' : 'bg-surface-container-lowest hover:bg-surface-container-low text-on-surface hover:shadow-xl'}
               ${s.border || ''}
             `}
           >
@@ -251,10 +263,10 @@ const Projects = () => {
           {items.map((it, i) => (
             <motion.div 
               key={it.title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
               className={`group cursor-pointer ${it.offset ? 'md:mt-12' : ''}`}
             >
               <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 ambient-shadow">
@@ -279,178 +291,341 @@ const Projects = () => {
   );
 };
 
-const SocialProof = () => (
-  <section id="about" className="py-24 max-w-7xl mx-auto px-6">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div className="flex flex-col gap-8">
-        <div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Rooted in Quality</h2>
-          <p className="text-lg text-on-surface-variant leading-relaxed">
-            Our commitment to organic vitality and structural precision is reflected in our track record. We don't just plant; we orchestrate ecosystems.
-          </p>
+const TESTIMONIALS = [
+  {
+    quote: "VerdantCraft completely revitalized our property. The balance of vibrant greenery and pristine stonework feels like a private luxury resort. Truly professional.",
+    name: "Sarah Jenkins",
+    location: "The Oaks",
+    avatar: "https://i.pravatar.cc/150?img=44"
+  },
+  {
+    quote: "Their attention to detail is unmatched. Our lawn has never looked healthier, and the seasonal cleanups make a world of difference. Incredible team.",
+    name: "Michael Chen",
+    location: "Pine Valley",
+    avatar: "https://i.pravatar.cc/150?img=11"
+  },
+  {
+    quote: "The hardscaping team transformed our backyard into a stunning entertainment space. Highly recommend their expertise to anyone looking to upgrade.",
+    name: "Elena Rodriguez",
+    location: "Highland Estates",
+    avatar: "https://i.pravatar.cc/150?img=5"
+  }
+];
+
+const SocialProof = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  return (
+    <section id="about" className="py-24 max-w-7xl mx-auto px-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="flex flex-col gap-8">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Rooted in Quality</h2>
+            <p className="text-lg text-on-surface-variant leading-relaxed">
+              Our commitment to organic vitality and structural precision is reflected in our track record. We don't just plant; we orchestrate ecosystems.
+            </p>
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ staggerChildren: 0.2 }}
+            className="grid grid-cols-2 gap-6"
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="bg-surface-container-lowest p-8 rounded-2xl ambient-shadow border-l-4 border-primary"
+            >
+              <div className="text-5xl font-display font-extrabold text-primary-container mb-2">15+</div>
+              <div className="font-bold text-on-surface-variant text-sm uppercase tracking-wider">Years Cultivating</div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="bg-surface-container-lowest p-8 rounded-2xl ambient-shadow border-l-4 border-secondary"
+            >
+              <div className="text-5xl font-display font-extrabold text-secondary mb-2">500</div>
+              <div className="font-bold text-on-surface-variant text-sm uppercase tracking-wider">Estates Managed</div>
+            </motion.div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-tertiary-container text-white p-10 rounded-2xl shadow-lg relative overflow-hidden mt-4"
+          >
+            <div className="absolute -right-8 -bottom-8 opacity-10 rotate-12">
+              <Trees size={180} strokeWidth={1} />
+            </div>
+            
+            <div className="flex justify-between items-center mb-6 relative z-10">
+              <h3 className="text-2xl font-display font-bold text-white">Client Stories</h3>
+              <div className="flex gap-2">
+                <button onClick={prevTestimonial} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm cursor-pointer" aria-label="Previous testimonial">
+                  <ChevronLeft size={20} />
+                </button>
+                <button onClick={nextTestimonial} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors backdrop-blur-sm cursor-pointer" aria-label="Next testimonial">
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+
+            <div className="relative z-10 min-h-[190px] flex flex-col justify-between">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentTestimonial}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col h-full justify-between gap-4"
+                >
+                  <p className="text-lg italic text-white/90 leading-relaxed">
+                    "{TESTIMONIALS[currentTestimonial].quote}"
+                  </p>
+                  <div className="flex items-center gap-4 mt-auto">
+                    <img 
+                      src={TESTIMONIALS[currentTestimonial].avatar} 
+                      alt={TESTIMONIALS[currentTestimonial].name} 
+                      className="w-12 h-12 rounded-full border-2 border-white/20 object-cover bg-white/10"
+                    />
+                    <div>
+                      <div className="font-bold text-sm tracking-widest uppercase text-white">{TESTIMONIALS[currentTestimonial].name}</div>
+                      <div className="text-xs text-white/70 font-medium tracking-wider">{TESTIMONIALS[currentTestimonial].location}</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
-          <div className="bg-surface-container-lowest p-8 rounded-2xl ambient-shadow border-l-4 border-primary">
-            <div className="text-5xl font-display font-extrabold text-primary-container mb-2">15+</div>
-            <div className="font-bold text-on-surface-variant text-sm uppercase tracking-wider">Years Cultivating</div>
-          </div>
-          <div className="bg-surface-container-lowest p-8 rounded-2xl ambient-shadow border-l-4 border-secondary">
-            <div className="text-5xl font-display font-extrabold text-secondary mb-2">500</div>
-            <div className="font-bold text-on-surface-variant text-sm uppercase tracking-wider">Estates Managed</div>
-          </div>
+        <div className="relative h-[650px] hidden md:block">
+          <motion.img 
+            initial={{ opacity: 0, scale: 1.1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            src={IMAGES.landscaper} 
+            alt="Professional landscaper" 
+            className="absolute right-0 top-0 w-[85%] h-[80%] object-cover rounded-2xl ambient-shadow z-10"
+          />
+          <motion.img 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
+            src={IMAGES.foliage} 
+            alt="Lush foliage" 
+            className="absolute left-0 bottom-0 w-2/3 h-2/3 object-cover rounded-2xl shadow-2xl border-[12px] border-surface z-20"
+          />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const LeadGen = () => {
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    
+    // Simulate API call
+    setTimeout(() => {
+      setStatus('success');
+      
+      // Reset after a short delay
+      setTimeout(() => {
+        setStatus('idle');
+        const form = e.target as HTMLFormElement;
+        form.reset();
+      }, 3000);
+    }, 800);
+  };
+
+  const isDisabled = status !== 'idle';
+
+  return (
+    <section className="py-24 bg-secondary text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">Start Your Project Today</h2>
+          <p className="text-xl text-white/80 mb-10 leading-relaxed max-w-lg font-medium">
+            Ready to bring breathing room and lush vitality to your landscape? Our design team is ready to consult with you.
+          </p>
+          <motion.ul 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.15 } },
+              hidden: {}
+            }}
+            className="space-y-6"
+          >
+            {[
+              "Customized Design Plans",
+              "Professional Execution",
+              "Ongoing Maintenance Options"
+            ].map((text) => (
+              <motion.li 
+                key={text} 
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0 }
+                }}
+                className="flex items-center gap-4 group"
+              >
+                <div className="bg-white/10 p-2 rounded-full group-hover:bg-primary-fixed transition-colors">
+                  <CheckCircle2 className="text-primary-fixed w-6 h-6" />
+                </div>
+                <span className="text-lg font-semibold">{text}</span>
+              </motion.li>
+            ))}
+          </motion.ul>
         </div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="bg-tertiary-container text-white p-10 rounded-2xl shadow-lg relative overflow-hidden mt-4"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="bg-surface rounded-3xl p-10 ambient-shadow text-on-surface relative overflow-hidden"
         >
-          <div className="absolute -right-8 -bottom-8 opacity-10 rotate-12">
-            <Trees size={180} strokeWidth={1} />
-          </div>
-          <h3 className="text-2xl font-display font-bold mb-4 relative z-10">Client Stories</h3>
-          <p className="text-lg italic text-white/90 mb-8 relative z-10 leading-relaxed">
-            "VerdantCraft completely revitalized our property. The balance of vibrant greenery and pristine stonework feels like a private luxury resort. Truly professional."
-          </p>
-          <div className="font-bold text-sm tracking-widest uppercase relative z-10 opacity-80">
-            — Sarah Jenkins, The Oaks
-          </div>
+          <AnimatePresence>
+            {status === 'success' && (
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="absolute top-0 left-0 w-full bg-primary-container text-white p-4 text-center font-bold shadow-md z-10 flex items-center justify-center gap-2"
+              >
+                <CheckCircle2 className="w-5 h-5 text-primary-fixed" />
+                Request received! We'll be in touch shortly.
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">First Name</label>
+                <input 
+                  type="text" 
+                  required
+                  disabled={isDisabled}
+                  placeholder="Jane" 
+                  className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Last Name</label>
+                <input 
+                  type="text" 
+                  required
+                  disabled={isDisabled}
+                  placeholder="Doe" 
+                  className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Email Address</label>
+              <input 
+                type="email" 
+                required
+                disabled={isDisabled}
+                placeholder="jane@example.com" 
+                className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Service of Interest</label>
+              <select 
+                disabled={isDisabled}
+                className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <option>Garden Design</option>
+                <option>Lawn Care</option>
+                <option>Hardscaping</option>
+                <option>Seasonal Cleanup</option>
+              </select>
+            </div>
+            <button 
+              type="submit"
+              disabled={isDisabled}
+              className="w-full bg-primary-container text-on-primary font-bold py-5 rounded-full hover-lift shadow-xl text-lg mt-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex justify-center items-center gap-2"
+            >
+              {status === 'submitting' ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                    className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                  />
+                  Sending...
+                </>
+              ) : status === 'success' ? (
+                <>
+                  <CheckCircle2 className="w-5 h-5" />
+                  Sent
+                </>
+              ) : (
+                'Request Consultation'
+              )}
+            </button>
+          </form>
         </motion.div>
       </div>
-
-      <div className="relative h-[650px] hidden md:block">
-        <motion.img 
-          initial={{ opacity: 0, scale: 1.1 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          src={IMAGES.landscaper} 
-          alt="Professional landscaper" 
-          className="absolute right-0 top-0 w-[85%] h-[80%] object-cover rounded-2xl ambient-shadow z-10"
-        />
-        <motion.img 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          src={IMAGES.foliage} 
-          alt="Lush foliage" 
-          className="absolute left-0 bottom-0 w-2/3 h-2/3 object-cover rounded-2xl shadow-2xl border-[12px] border-surface z-20"
-        />
-      </div>
-    </div>
-  </section>
-);
-
-const LeadGen = () => (
-  <section className="py-24 bg-secondary text-white overflow-hidden">
-    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div>
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">Start Your Project Today</h2>
-        <p className="text-xl text-white/80 mb-10 leading-relaxed max-w-lg font-medium">
-          Ready to bring breathing room and lush vitality to your landscape? Our design team is ready to consult with you.
-        </p>
-        <ul className="space-y-6">
-          {[
-            "Customized Design Plans",
-            "Professional Execution",
-            "Ongoing Maintenance Options"
-          ].map((text) => (
-            <li key={text} className="flex items-center gap-4 group">
-              <div className="bg-white/10 p-2 rounded-full group-hover:bg-primary-fixed transition-colors">
-                <CheckCircle2 className="text-primary-fixed w-6 h-6" />
-              </div>
-              <span className="text-lg font-semibold">{text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <motion.div 
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        className="bg-surface rounded-3xl p-10 ambient-shadow text-on-surface"
-      >
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">First Name</label>
-              <input 
-                type="text" 
-                placeholder="Jane" 
-                className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Last Name</label>
-              <input 
-                type="text" 
-                placeholder="Doe" 
-                className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none"
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Email Address</label>
-            <input 
-              type="email" 
-              placeholder="jane@example.com" 
-              className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Service of Interest</label>
-            <select className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none appearance-none cursor-pointer">
-              <option>Garden Design</option>
-              <option>Lawn Care</option>
-              <option>Hardscaping</option>
-              <option>Seasonal Cleanup</option>
-            </select>
-          </div>
-          <button className="w-full bg-primary-container text-on-primary font-bold py-5 rounded-full hover-lift shadow-xl text-lg mt-4">
-            Request Consultation
-          </button>
-        </form>
-      </motion.div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Footer = () => (
-  <footer className="bg-surface-container-highest py-20 px-6">
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-      <div className="col-span-1 md:col-span-2">
-        <div className="flex items-center gap-2 mb-6">
-          <Trees className="text-primary w-8 h-8" />
-          <span className="font-display text-2xl font-extrabold text-on-surface tracking-tight">VerdantCraft</span>
+  <footer className="bg-surface-container-highest/95 backdrop-blur-md py-4 md:py-6 px-6 sticky bottom-0 z-40 border-t border-black/5 shadow-[0_-4px_25px_rgba(0,0,0,0.1)]">
+    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+      <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
+        <div className="flex items-center gap-2">
+          <Trees className="text-primary w-6 h-6" />
+          <span className="font-display text-xl font-extrabold text-on-surface tracking-tight hidden sm:block">VerdantCraft</span>
         </div>
-        <p className="text-on-surface-variant max-w-sm mb-8 leading-relaxed font-medium">
-          Cultivating premium outdoor spaces with organic vitality and professional precision since 2008.
+        <div className="hidden md:block w-px h-6 bg-black/10 mx-2" />
+        <p className="text-sm text-on-surface-variant font-medium hidden lg:block">
+          © {new Date().getFullYear()} VerdantCraft Landscaping.
         </p>
-        <div className="flex gap-4">
-          <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-sm">
-            <Instagram size={20} />
-          </a>
-          <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-sm">
-            <Facebook size={20} />
-          </a>
-          <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary hover:bg-secondary hover:text-white transition-all shadow-sm">
-            <Phone size={20} />
-          </a>
-        </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        <h4 className="font-bold text-sm uppercase tracking-widest text-on-surface mb-2">Resources</h4>
-        {['Maintenance Tips', 'Pruning Guide', 'Seasonal Care', 'Contact Us'].map(l => (
-          <a key={l} href="#" className="text-on-surface-variant hover:text-primary transition-colors font-medium">{l}</a>
+      <div className="flex items-center justify-center gap-4 md:gap-8 hide-scrollbar overflow-x-auto w-full md:w-auto">
+        {['Garden Design Tips', 'Maintenance Packages', 'Portfolio Showcase'].map(l => (
+          <a key={l} href="#" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">{l}</a>
         ))}
       </div>
 
-      <div className="flex flex-col justify-between items-start md:items-end">
-        <div className="hidden md:block" />
-        <p className="text-sm text-on-surface-variant font-medium text-left md:text-right">
-          © {new Date().getFullYear()} VerdantCraft Landscaping.<br /> 
-          All rights reserved worldwide.
-        </p>
+      <div className="flex items-center justify-center gap-4">
+        <div className="flex gap-3">
+          <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary hover:bg-primary hover:text-white hover:scale-110 hover:-translate-y-1 hover:shadow-md transition-all duration-300 shadow-sm" aria-label="Instagram">
+            <Instagram size={20} />
+          </a>
+          <a href="#" className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-secondary hover:bg-primary hover:text-white hover:scale-110 hover:-translate-y-1 hover:shadow-md transition-all duration-300 shadow-sm" aria-label="Facebook">
+            <Facebook size={20} />
+          </a>
+        </div>
+        <a href="tel:+1234567890" className="flex items-center gap-2 bg-primary-container text-on-primary px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-sm">
+          <Phone size={16} />
+          <span className="hidden sm:inline">Contact Us</span>
+        </a>
       </div>
     </div>
   </footer>
