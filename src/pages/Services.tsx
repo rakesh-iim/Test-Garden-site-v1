@@ -43,13 +43,13 @@ export const Services = () => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-16"
+        className="mb-16"
       >
         <span className="inline-block bg-primary-container/10 text-primary-container font-bold px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
           What We Do
         </span>
         <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">Our Services</h1>
-        <p className="text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-on-surface-variant max-w-3xl leading-relaxed">
           From full masterplans to meticulous maintenance, our services are tailored to create and preserve the integrity of your landscape.
         </p>
       </motion.div>

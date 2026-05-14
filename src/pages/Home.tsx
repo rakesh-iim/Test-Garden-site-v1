@@ -4,6 +4,7 @@ import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, Chrome as ChevronRight, Tre
 import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
 import { LeadGen } from '../components/LeadGen';
+import { LandscapesInAction } from '../components/LandscapesInAction';
 
 const Hero = () => {
   const ref = React.useRef(null);
@@ -166,6 +167,10 @@ export const Home = () => {
     <>
       <Hero />
       <Expertise />
+      <div className="max-w-7xl mx-auto px-6">
+        <hr className="border-t border-black/10 dark:border-white/10" />
+      </div>
+      <LandscapesInAction />
       <LeadGen simplified={true} />
     </>
   );

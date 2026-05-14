@@ -28,3 +28,66 @@ export const TESTIMONIALS = [
     avatar: "https://i.pravatar.cc/150?img=5"
   }
 ];
+
+export const PORTFOLIO_ITEMS = [
+  { 
+    id: "oasis-estate",
+    title: "The Oasis Estate", 
+    category: "Complete redesign & installation", 
+    img: IMAGES.project1,
+    description: "A complete overhaul of a traditional property into a modern outdoor oasis. This project involved extensive grading, the installation of mature tropical specimens, and a comprehensive hardscaping package including a travertine pool deck and custom water features. The result is a seamless transition between indoor and outdoor living spaces.",
+    location: "Paradise Valley",
+    year: "2023",
+    services: ["Garden Design", "Hardscaping", "Lawn Care"]
+  },
+  { 
+    id: "botanical-pathways",
+    title: "Botanical Pathways", 
+    category: "Hardscaping & Tropical Planting", 
+    img: IMAGES.project2,
+    description: "Transforming an underutilized backyard into an immersive botanical walkthrough. We utilized natural stone pavers set amidst vibrant, low-maintenance tropical foliage. The pathways are designed to encourage exploration and provide multiple secluded seating areas.",
+    location: "Highland Estates",
+    year: "2024",
+    services: ["Hardscaping", "Garden Design"]
+  },
+  { 
+    id: "modern-zen",
+    title: "Modern Zen", 
+    category: "Minimalist Rock Garden", 
+    img: IMAGES.hero,
+    description: "A minimalist approach to landscaping focusing on tranquility and clean lines. This project features raked gravel, strategically placed boulders, and selective use of architectural plants to create a calming, meditative environment that requires minimal maintenance.",
+    location: "Urban Core",
+    year: "2023",
+    services: ["Garden Design", "Seasonal Cleanup"]
+  },
+  { 
+    id: "azure-retreat",
+    title: "Azure Retreat", 
+    category: "Poolside integration & maintenance", 
+    img: IMAGES.project3,
+    description: "Enhancing an existing pool area with lush, colorful plantings that provide privacy without obstructing the view. We selected salt-tolerant species and designed a custom irrigation system to ensure year-round vibrancy.",
+    location: "Coastal Ridge",
+    year: "2022",
+    services: ["Garden Design", "Lawn Care"]
+  },
+  { 
+    id: "urban-jungle",
+    title: "Urban Jungle", 
+    category: "Vertical Gardens & Balcony", 
+    img: IMAGES.landscaper,
+    description: "Maximizing limited space by utilizing vertical surfaces. This project transformed a barren concrete courtyard into a lush, multi-layered environment using custom trellises, hanging planters, and varied textures.",
+    location: "Downtown",
+    year: "2024",
+    services: ["Garden Design"]
+  },
+  { 
+    id: "verdant-slopes",
+    title: "Verdant Slopes", 
+    category: "Terrace Landscaping", 
+    img: IMAGES.foliage,
+    description: "Addressing a challenging sloped property by creating functional, terraced levels. We installed retaining walls using locally sourced stone and planted each level with drought-resistant native species to control erosion and provide visual interest.",
+    location: "The Hills",
+    year: "2023",
+    services: ["Hardscaping", "Garden Design"]
+  },
+];
