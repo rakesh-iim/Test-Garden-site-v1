@@ -1,0 +1,63 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Catch-All (Default Deny)
+    match /{document=**} { 
+      allow read, write: if false; 
+    }
+
+    // --- Helpers ---
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+
+    // --- Validation Blueprints ---
+
+    // ContactSubmission Validation
+    function isValidContactSubmission(data) {
+      return data.keys().hasAll(['name', 'email', 'createdAt'])
+        && data.size() >= 3 && data.size() <= 5
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 150
+        && (data.keys().hasAny(['phone']) ? (data.phone is string && data.phone.size() <= 50) : true)
+        && (data.keys().hasAny(['message']) ? (data.message is string && data.message.size() <= 2000) : true);
+    }
+
+    // Resource Validation
+    function isValidResource(data) {
+      return data.keys().hasAll(['title', 'img', 'createdAt'])
+        && data.size() >= 3 && data.size() <= 4
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 100
+        && data.img is string && data.img.size() > 0 && data.img.size() <= 2000
+        && (data.keys().hasAny(['category']) ? (data.category is string && data.category.size() <= 100) : true);
+    }
+
+    // --- Rules ---
+
+    // Collection: contact_submissions
+    match /contact_submissions/{submissionId} {
+      // Anyone can create a submission (public contact form)
+      allow create: if isValidId(submissionId)
+                    && isValidContactSubmission(incoming())
+                    && incoming().createdAt == request.time;
+      
+      // No public read, update, or list to prevent PII leakage
+      allow read, update, delete: if false;
+    }
+
+    // Collection: resources
+    match /resources/{resourceId} {
+      // Publicly readable for the portfolio gallery
+      allow get: if isValidId(resourceId);
+      allow list: if true; // No owner restriction since it's a completely public portfolio gallery
+
+      // Only admins (simulated here as authenticated users if the app had auth) can create/update. 
+      // Disabling public writes to prevent vandalism.
+      allow create, update, delete: if false; 
+    }
+  }
+}
