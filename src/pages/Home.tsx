@@ -6,6 +6,8 @@ import { IMAGES, TESTIMONIALS } from '../constants';
 import { LeadGen } from '../components/LeadGen';
 import { LandscapesInAction } from '../components/LandscapesInAction';
 
+import { ClientMarquee } from '../components/ClientMarquee';
+
 const Hero = () => {
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -171,6 +173,7 @@ export const Home = () => {
         <hr className="border-t border-black/10 dark:border-white/10" />
       </div>
       <LandscapesInAction />
+      <ClientMarquee />
       <LeadGen simplified={true} />
     </>
   );

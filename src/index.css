@@ -33,6 +33,18 @@
   
   --spacing-section-gap: 120px;
   --spacing-gutter: 24px;
+  
+  --animate-marquee: marquee-step 24s ease-in-out infinite;
+  
+  @keyframes marquee-step {
+    0%, 8.33% { transform: translateX(0%); }
+    16.66%, 25% { transform: translateX(-8.333%); }
+    33.33%, 41.66% { transform: translateX(-16.666%); }
+    50%, 58.33% { transform: translateX(-25%); }
+    66.66%, 75% { transform: translateX(-33.333%); }
+    83.33%, 91.66% { transform: translateX(-41.666%); }
+    100% { transform: translateX(-50%); }
+  }
 }
 
 @layer base {

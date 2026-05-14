@@ -39,13 +39,37 @@ export const LeadGen = ({ simplified = false }) => {
     setStatus('submitting');
     
     try {
-      await addDoc(collection(db, 'contact_submissions'), {
+      const payload = {
         name: `${firstName} ${lastName}`.trim(),
         email: email.trim(),
-        phone: phone ? phone.trim() : null,
-        message: message ? message.trim() : (service ? `Interested in: ${service}` : null),
-        createdAt: serverTimestamp()
-      });
+        phone: phone ? phone.trim() : '',
+        service: service || '',
+        message: message ? message.trim() : (service ? `Interested in: ${service}` : '')
+      };
+
+      const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
+
+      if (googleSheetUrl) {
+        // Send to Google Sheets via Google Apps Script
+        await fetch(googleSheetUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Fallback to Firebase
+        await addDoc(collection(db, 'contact_submissions'), {
+          name: payload.name,
+          email: payload.email,
+          phone: payload.phone || null,
+          message: payload.message || null,
+          service: payload.service || null,
+          createdAt: serverTimestamp()
+        });
+      }
       
       setStatus('success');
       
@@ -131,7 +155,7 @@ export const LeadGen = ({ simplified = false }) => {
                   type="text" 
                   name="firstName"
                   disabled={isDisabled}
-                  placeholder="Jane" 
+                  placeholder="Aarav" 
                   className={`w-full bg-surface-container-low border-b-2 ${errors.firstName ? 'border-red-500' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
                 />
               </div>
@@ -144,7 +168,7 @@ export const LeadGen = ({ simplified = false }) => {
                   type="text" 
                   name="lastName"
                   disabled={isDisabled}
-                  placeholder="Doe" 
+                  placeholder="Sharma" 
                   className={`w-full bg-surface-container-low border-b-2 ${errors.lastName ? 'border-red-500' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
                 />
               </div>
@@ -160,7 +184,7 @@ export const LeadGen = ({ simplified = false }) => {
                   type="email" 
                   name="email"
                   disabled={isDisabled}
-                  placeholder="jane@example.com" 
+                  placeholder="aarav@example.com" 
                   className={`w-full bg-surface-container-low border-b-2 ${errors.email ? 'border-red-500' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
                 />
               </div>
@@ -172,7 +196,7 @@ export const LeadGen = ({ simplified = false }) => {
                   type="tel" 
                   name="phone"
                   disabled={isDisabled}
-                  placeholder="(555) 555-5555" 
+                  placeholder="+91 98765 43210" 
                   className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>

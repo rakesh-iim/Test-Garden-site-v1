@@ -30,7 +30,7 @@ export const Navbar = () => {
             <Link 
               key={item.name} 
               to={item.path}
-              className={`text-sm font-semibold hover:text-primary transition-colors ${location.pathname === item.path ? 'text-primary' : 'text-on-surface-variant'}`}
+              className={`text-sm font-semibold inline-block origin-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 hover:text-primary hover:drop-shadow-sm ${location.pathname === item.path ? 'text-primary' : 'text-on-surface-variant'}`}
             >
               {item.name}
             </Link>
