@@ -403,24 +403,25 @@ export const LeadGen = ({ simplified = false }) => {
             <button 
               type="submit"
               disabled={isDisabled}
-              className="w-full bg-primary-container text-on-primary font-bold py-5 rounded-full shadow-xl text-lg mt-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex justify-center items-center gap-2 transition-all duration-500 ease-in-out hover:bg-white hover:text-primary-container hover:shadow-2xl hover:scale-[1.02] border-2 border-transparent hover:border-primary-container hover:-translate-y-1"
+              className="relative overflow-hidden group w-full bg-primary-container text-on-primary font-bold py-5 rounded-full shadow-xl text-lg mt-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex justify-center items-center gap-2 border border-transparent transition-transform duration-300 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1"
             >
+              <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
               {status === 'submitting' ? (
                 <>
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                    className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                    className="w-5 h-5 border-2 border-white/30 border-t-white group-hover:border-white/50 group-hover:border-t-primary-container rounded-full relative z-10 transition-colors duration-[0.5s]"
                   />
-                  Sending...
+                  <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Sending...</span>
                 </>
               ) : status === 'success' ? (
                 <>
-                  <CheckCircle2 className="w-5 h-5" />
-                  Sent
+                  <CheckCircle2 className="w-5 h-5 relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]" />
+                  <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Sent</span>
                 </>
               ) : (
-                'Request Consultation'
+                <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Request Consultation</span>
               )}
             </button>
           </form>

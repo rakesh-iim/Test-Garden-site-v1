@@ -34,9 +34,10 @@ export const Footer = () => (
             <Facebook size={20} />
           </a>
         </div>
-        <Link to="/contact" className="flex items-center gap-2 bg-primary-container text-on-primary px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-sm">
-          <Phone size={16} />
-          <span className="hidden sm:inline">Contact Us</span>
+        <Link to="/contact" className="relative overflow-hidden group flex items-center gap-2 bg-primary-container text-on-primary px-5 py-2.5 rounded-full font-bold text-sm hover:scale-[1.03] hover:-translate-y-0.5 hover:shadow-lg transition-transform duration-300 shadow-sm">
+          <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+          <Phone size={16} className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]" />
+          <span className="hidden sm:inline relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Contact Us</span>
         </Link>
       </div>
     </div>

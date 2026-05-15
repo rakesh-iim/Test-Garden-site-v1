@@ -38,8 +38,9 @@ export const Navbar = () => {
               </Link>
             );
           })}
-          <Link to="/contact" className="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover-lift text-center">
-            Book a Visit
+          <Link to="/contact" className="relative overflow-hidden group bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm text-center shadow-sm transition-transform duration-300 hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5 my-auto">
+            <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+            <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Book a Visit</span>
           </Link>
         </div>
 
@@ -72,8 +73,9 @@ export const Navbar = () => {
                   </Link>
                 );
               })}
-              <Link to="/contact" onClick={() => setIsOpen(false)} className="bg-primary-container text-on-primary px-6 py-3 rounded-full font-semibold mt-2 text-center text-base block">
-                Book a Visit
+              <Link to="/contact" onClick={() => setIsOpen(false)} className="relative overflow-hidden group bg-primary-container text-on-primary px-6 py-3 rounded-full font-semibold mt-2 text-center text-base block shadow-sm transition-transform duration-300 hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5">
+                <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+                <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Book a Visit</span>
               </Link>
             </div>
           </motion.div>
