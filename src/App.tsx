@@ -11,11 +11,12 @@ import { BackToTop } from './components/BackToTop';
 import { Home } from './pages/Home';
 import { AboutUs } from './pages/AboutUs';
 import { Services } from './pages/Services';
-import { Portfolio } from './pages/Portfolio';
-import { PortfolioDetail } from './pages/PortfolioDetail';
-import { Testimonials } from './pages/Testimonials';
+import { Gallery } from './pages/Gallery';
+import { GalleryDetail } from './pages/GalleryDetail';
 import { ContactUs } from './pages/ContactUs';
 import { Projects } from './pages/Projects';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -36,11 +37,12 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:itemId" element={<PortfolioDetail />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/:itemId" element={<GalleryDetail />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
           </Routes>
         </main>
         <Footer />

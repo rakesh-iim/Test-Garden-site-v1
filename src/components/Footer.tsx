@@ -20,7 +20,9 @@ export const Footer = () => (
       <div className="flex items-center justify-center gap-4 md:gap-8 hide-scrollbar overflow-x-auto w-full md:w-auto">
         <Link to="/services" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Services</Link>
         <Link to="/about" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">About Us</Link>
-        <Link to="/portfolio" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Portfolio Showcase</Link>
+        <Link to="/gallery" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Gallery Showcase</Link>
+        <Link to="/privacy" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Privacy Policy</Link>
+        <Link to="/terms" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Terms of Service</Link>
       </div>
 
       <div className="flex items-center justify-center gap-4">

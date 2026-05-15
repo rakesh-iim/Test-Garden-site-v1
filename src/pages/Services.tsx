@@ -7,34 +7,36 @@ import { Link } from 'react-router-dom';
 export const Services = () => {
   const services = [
     {
-      title: "Garden Design",
-      desc: "Expertly curated layouts that balance saturated botanical tones with pristine structures. We work closely with clients to understand their vision and translate it into a living masterpiece.",
+      title: "Terrace Transformation",
+      desc: "Turn your underutilized rooftop or terrace into a sky-high sanctuary. We design bespoke urban gardens with custom planters, optimal drainage, and resilient planting schemes.",
       icon: Palette,
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
       image: IMAGES.blueprints
     },
     {
-      title: "Lawn Care",
-      desc: "Precision mowing, aeration, and fertilization to maintain a vibrant, high-energy green canvas. Our comprehensive care schedules keep your grass thriving year-round.",
+      title: "Balcony Makeover",
+      desc: "Maximize limited space with vertical gardens, custom-built seating, and curated container planting to create a lush, intimate retreat right outside your door.",
       icon: Sprout,
-      color: "bg-primary-container",
-      textColor: "text-on-primary",
-      theme: "dark"
+      color: "bg-primary-container/10",
+      textColor: "text-primary-container",
+      image: IMAGES.project3
     },
     {
-      title: "Hardscaping",
-      desc: "Structurally sound stonework, pathways, retaining walls, and patios that provide architectural \"breathing room\" amidst organic elements.",
+      title: "Penthouse Transformation",
+      desc: "Elevate your penthouse exteriors with luxury landscaping, incorporating architectural stonework, dynamic lighting, and elegant, wind-resilient flora.",
       icon: Grid2X2,
-      color: "bg-secondary-container/30",
-      textColor: "text-on-secondary-container"
+      color: "bg-primary-container/10",
+      textColor: "text-primary-container",
+      image: IMAGES.project2
     },
     {
-      title: "Seasonal Cleanup",
-      desc: "Rigorous maintenance to clear debris, prune dead elements, and prepare your landscape for optimal growth in the upcoming season.",
+      title: "Institute Green Space",
+      desc: "Develop vibrant, low-maintenance green spaces for educational or corporate campuses, establishing outdoor areas that inspire collaboration and provide a natural haven.",
       icon: Leaf,
-      color: "bg-tertiary-container/10",
-      textColor: "text-tertiary-container",
+      color: "bg-primary-container/10",
+      textColor: "text-primary-container",
+      image: IMAGES.foliage
     }
   ];
 
@@ -62,7 +64,7 @@ export const Services = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className={`rounded-2xl overflow-hidden shadow-lg ${s.theme === 'dark' ? 'bg-primary-container text-white' : 'bg-surface-container-lowest text-on-surface'}`}
+            className={`rounded-2xl overflow-hidden shadow-lg bg-surface-container-lowest text-on-surface`}
           >
             {s.image && (
               <div className="h-48 w-full">
@@ -70,24 +72,23 @@ export const Services = () => {
               </div>
             )}
             <div className="p-8">
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm
-                ${s.theme === 'dark' ? 'bg-white/20' : s.color} ${s.textColor}`}>
+              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm ${s.color} ${s.textColor}`}>
                 <s.icon size={28} />
               </div>
-              <h3 className={`text-3xl font-display font-bold mb-4 ${s.theme === 'dark' ? 'text-white' : 'text-on-surface'}`}>{s.title}</h3>
-              <p className={`text-lg leading-relaxed mb-8 ${s.theme === 'dark' ? 'text-white/80' : 'text-on-surface-variant'}`}>{s.desc}</p>
+              <h3 className={`text-3xl font-display font-bold mb-4 text-on-surface`}>{s.title}</h3>
+              <p className={`text-lg leading-relaxed mb-8 text-on-surface-variant`}>{s.desc}</p>
               
               <ul className="space-y-3 mb-8">
                 {[1, 2, 3].map((item) => (
                   <li key={item} className="flex items-center gap-3">
-                    <CheckCircle2 size={20} className={s.theme === 'dark' ? 'text-primary-fixed' : 'text-primary-container'} />
-                    <span className={s.theme === 'dark' ? 'text-white/90' : 'text-on-surface-variant'}>Premium offering detail {item}</span>
+                    <CheckCircle2 size={20} className="text-primary-container" />
+                    <span className="text-on-surface-variant">Premium offering detail {item}</span>
                   </li>
                 ))}
               </ul>
               
-              <Link to="/contact" className={`inline-flex items-center gap-2 font-bold px-6 py-3 rounded-full transition-colors ${s.theme === 'dark' ? 'bg-white text-primary-container hover:bg-white/90' : 'bg-surface border border-secondary text-secondary hover:bg-primary-container/5'}`}>
-                Request {s.title}
+              <Link to={`/contact?service=${encodeURIComponent(s.title)}`} className="inline-flex items-center gap-2 font-bold px-8 py-4 rounded-full transition-colors bg-primary-container text-on-primary hover-lift shadow-lg hover:shadow-xl mt-4">
+                Request a Quote
               </Link>
             </div>
           </motion.div>

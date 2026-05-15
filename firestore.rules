@@ -20,11 +20,12 @@ service cloud.firestore {
     // ContactSubmission Validation
     function isValidContactSubmission(data) {
       return data.keys().hasAll(['name', 'email', 'createdAt'])
-        && data.size() >= 3 && data.size() <= 5
+        && data.size() >= 3 && data.size() <= 6
         && data.name is string && data.name.size() > 0 && data.name.size() <= 100
         && data.email is string && data.email.size() > 0 && data.email.size() <= 150
         && (data.keys().hasAny(['phone']) ? (data.phone is string && data.phone.size() <= 50) : true)
-        && (data.keys().hasAny(['message']) ? (data.message is string && data.message.size() <= 2000) : true);
+        && (data.keys().hasAny(['message']) ? (data.message is string && data.message.size() <= 2000) : true)
+        && (data.keys().hasAny(['service']) ? (data.service is string && data.service.size() <= 100) : true);
     }
 
     // Resource Validation

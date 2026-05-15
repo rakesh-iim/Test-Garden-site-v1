@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
 import { LeadGen } from '../components/LeadGen';
 import { LandscapesInAction } from '../components/LandscapesInAction';
+import { TestimonialsSection } from '../components/TestimonialsSection';
 
 import { ClientMarquee } from '../components/ClientMarquee';
 
@@ -50,8 +51,8 @@ const Hero = () => {
               Get a Free Quote
               <ArrowRight className="w-5 h-5" />
             </Link>
-            <Link to="/portfolio" className="border-2 border-secondary text-secondary font-bold px-8 py-4 rounded-full hover:bg-secondary/5 transition-colors w-fit text-center">
-              View Portfolio
+            <Link to="/gallery" className="border-2 border-secondary text-secondary font-bold px-8 py-4 rounded-full hover:bg-secondary/5 transition-colors w-fit text-center">
+              View Gallery
             </Link>
           </div>
         </motion.div>
@@ -173,6 +174,7 @@ export const Home = () => {
         <hr className="border-t border-black/10 dark:border-white/10" />
       </div>
       <LandscapesInAction />
+      <TestimonialsSection />
       <ClientMarquee />
       <LeadGen simplified={true} />
     </>

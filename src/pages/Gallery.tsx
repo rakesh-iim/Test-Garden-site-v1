@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { PORTFOLIO_ITEMS } from '../constants';
-import { Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, MapPin, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export const Portfolio = () => {
+export const Gallery = () => {
   return (
     <div className="pt-24 pb-20 max-w-7xl mx-auto px-6">
       <motion.div 
@@ -40,7 +40,7 @@ export const Portfolio = () => {
             }}
             className="group w-full"
           >
-            <Link to={`/portfolio/${it.id}`} className="block cursor-pointer">
+            <Link to={`/gallery/${it.id}`} className="block cursor-pointer">
               <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 ambient-shadow bg-black/10">
                 <img 
                   src={it.img} 
@@ -50,18 +50,33 @@ export const Portfolio = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                   <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500 delay-100">
-                    <button className="p-2 bg-white/20 hover:bg-primary rounded-full backdrop-blur-md text-white transition-colors" aria-label="Share on Twitter" onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.origin + `/portfolio/${it.id}`)}&text=${encodeURIComponent(`Check out ${it.title}`)}`, '_blank', 'noopener,noreferrer'); }}>
+                    <button className="p-2 bg-white/20 hover:bg-primary rounded-full backdrop-blur-md text-white transition-colors" aria-label="Share on Twitter" onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.origin + `/gallery/${it.id}`)}&text=${encodeURIComponent(`Check out ${it.title}`)}`, '_blank', 'noopener,noreferrer'); }}>
                       <Twitter size={16} />
                     </button>
-                    <button className="p-2 bg-white/20 hover:bg-primary rounded-full backdrop-blur-md text-white transition-colors" aria-label="Share on Facebook" onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin + `/portfolio/${it.id}`)}`, '_blank', 'noopener,noreferrer'); }}>
+                    <button className="p-2 bg-white/20 hover:bg-primary rounded-full backdrop-blur-md text-white transition-colors" aria-label="Share on Facebook" onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin + `/gallery/${it.id}`)}`, '_blank', 'noopener,noreferrer'); }}>
                       <Facebook size={16} />
                     </button>
-                    <button className="p-2 bg-white/20 hover:bg-primary rounded-full backdrop-blur-md text-white transition-colors" aria-label="Share on LinkedIn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.origin + `/portfolio/${it.id}`)}&title=${encodeURIComponent(it.title)}`, '_blank', 'noopener,noreferrer'); }}>
+                    <button className="p-2 bg-white/20 hover:bg-primary rounded-full backdrop-blur-md text-white transition-colors" aria-label="Share on LinkedIn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.origin + `/gallery/${it.id}`)}&title=${encodeURIComponent(it.title)}`, '_blank', 'noopener,noreferrer'); }}>
                       <Linkedin size={16} />
                     </button>
                   </div>
                   <h3 className="text-white text-2xl font-display font-bold opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">{it.title}</h3>
-                  <p className="text-white/80 font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150">{it.category}</p>
+                  <p className="text-white/80 font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 mb-3">{it.category}</p>
+                  
+                  <div className="flex items-center gap-4 text-white/90 text-sm font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                    {it.location && (
+                      <span className="flex items-center gap-1.5">
+                        <MapPin size={14} className="text-primary-fixed" />
+                        {it.location}
+                      </span>
+                    )}
+                    {it.year && (
+                      <span className="flex items-center gap-1.5">
+                        <Calendar size={14} className="text-primary-fixed" />
+                        {it.year}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
               <h3 className="text-2xl font-display font-bold mb-2 group-hover:text-primary transition-colors duration-300">{it.title}</h3>

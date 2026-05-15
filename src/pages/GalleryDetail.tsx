@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { PORTFOLIO_ITEMS } from '../constants';
 import { ArrowLeft, ExternalLink, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
-export const PortfolioDetail = () => {
+export const GalleryDetail = () => {
   const { itemId } = useParams<{ itemId: string }>();
   const project = PORTFOLIO_ITEMS.find((item) => item.id === itemId);
 
@@ -13,9 +13,9 @@ export const PortfolioDetail = () => {
       <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center">
         <h1 className="text-4xl font-display font-bold mb-4">Project Not Found</h1>
         <p className="text-on-surface-variant mb-8">The project you are looking for does not exist or has been removed.</p>
-        <Link to="/portfolio" className="inline-flex items-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full hover-lift shadow-lg">
+        <Link to="/gallery" className="inline-flex items-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full hover-lift shadow-lg">
           <ArrowLeft size={20} />
-          Back to Portfolio
+          Back to Gallery
         </Link>
       </div>
     );
@@ -39,9 +39,9 @@ export const PortfolioDetail = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
           <div className="max-w-7xl mx-auto px-6 pb-12 w-full">
-            <Link to="/portfolio" className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium mb-6 transition-colors">
+            <Link to="/gallery" className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium mb-6 transition-colors">
               <ArrowLeft size={18} />
-              Back to Portfolio
+              Back to Gallery
             </Link>
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -80,15 +80,14 @@ export const PortfolioDetail = () => {
               {project.description}
             </p>
             
-            <h3 className="text-2xl font-display font-bold mb-6 text-on-surface">Key Services Provided</h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+            <h3 className="text-2xl font-display font-bold mb-6 text-on-surface">Tags & Services</h3>
+            <div className="flex flex-wrap gap-3 mb-12">
               {project.services.map((service, idx) => (
-                <li key={idx} className="flex items-center gap-3 bg-surface-container-low p-4 rounded-xl border border-surface-container-highest">
-                  <CheckCircle2 className="text-primary-container shrink-0" size={24} />
-                  <span className="font-semibold text-on-surface">{service}</span>
-                </li>
+                <span key={idx} className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm border border-primary/20 hover:bg-primary/20 transition-colors">
+                  {service}
+                </span>
               ))}
-            </ul>
+            </div>
 
             {/* A placeholder for more images if available, we'll just show the hero image again to simulate gallery */}
             <h3 className="text-2xl font-display font-bold mb-6 text-on-surface">Project Gallery</h3>
@@ -139,10 +138,10 @@ export const PortfolioDetail = () => {
 
       {/* Related Projects Section */}
       <div className="max-w-7xl mx-auto px-6 mt-24 pt-16 border-t border-surface-container-low">
-        <h2 className="text-3xl font-display font-bold mb-8 text-on-surface">More From Our Portfolio</h2>
+        <h2 className="text-3xl font-display font-bold mb-8 text-on-surface">More From Our Gallery</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {relatedProjects.map((rel) => (
-            <Link key={rel.id} to={`/portfolio/${rel.id}`} className="group block">
+            <Link key={rel.id} to={`/gallery/${rel.id}`} className="group block">
               <div className="relative overflow-hidden rounded-2xl aspect-video mb-4 bg-surface-container-low">
                 <img 
                   src={rel.img} 

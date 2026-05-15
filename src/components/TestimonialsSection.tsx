@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Trees, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TESTIMONIALS } from '../constants';
 
-export const Testimonials = () => {
+export const TestimonialsSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [direction, setDirection] = useState(0);
 

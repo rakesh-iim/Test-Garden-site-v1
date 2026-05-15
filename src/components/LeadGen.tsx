@@ -1,34 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle2 } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export const LeadGen = ({ simplified = false }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialService = queryParams.get('service') || 'Terrace Transformation';
+
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [formValues, setFormValues] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    service: initialService,
+    message: ''
+  });
+
+  const validateField = (name: string, value: string) => {
+    let error = '';
+    if (name === 'firstName' && !value.trim()) error = 'First name is required';
+    if (name === 'lastName' && !value.trim()) error = 'Last name is required';
+    if (name === 'email') {
+      if (!value.trim()) error = 'Email is required';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = 'Invalid email address';
+    }
+    return error;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({ ...prev, [name]: value }));
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    
-    const firstName = formData.get('firstName') as string;
-    const lastName = formData.get('lastName') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const message = formData.get('message') as string;
-    const service = formData.get('service') as string;
-    
     const newErrors: Record<string, string> = {};
-    if (!firstName?.trim()) newErrors.firstName = 'Required';
-    if (!lastName?.trim()) newErrors.lastName = 'Required';
-    if (!email?.trim()) {
-      newErrors.email = 'Required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Invalid email';
-    }
+    const newTouched: Record<string, boolean> = {};
+    
+    Object.entries(formValues).forEach(([key, value]) => {
+      newTouched[key] = true;
+      const error = validateField(key, value);
+      if (error) newErrors[key] = error;
+    });
+
+    setTouched(newTouched);
     
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -40,11 +71,11 @@ export const LeadGen = ({ simplified = false }) => {
     
     try {
       const payload = {
-        name: `${firstName} ${lastName}`.trim(),
-        email: email.trim(),
-        phone: phone ? phone.trim() : '',
-        service: service || '',
-        message: message ? message.trim() : (service ? `Interested in: ${service}` : '')
+        name: `${formValues.firstName} ${formValues.lastName}`.trim(),
+        email: formValues.email.trim(),
+        phone: formValues.phone.trim(),
+        service: formValues.service,
+        message: formValues.message.trim() || (formValues.service ? `Interested in: ${formValues.service}` : '')
       };
 
       const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
@@ -61,25 +92,36 @@ export const LeadGen = ({ simplified = false }) => {
         });
       } else {
         // Fallback to Firebase
-        await addDoc(collection(db, 'contact_submissions'), {
+        const submission: any = {
           name: payload.name,
           email: payload.email,
-          phone: payload.phone || null,
-          message: payload.message || null,
-          service: payload.service || null,
           createdAt: serverTimestamp()
-        });
+        };
+        if (payload.phone) submission.phone = payload.phone;
+        if (payload.message) submission.message = payload.message;
+        if (payload.service) submission.service = payload.service;
+        
+        await addDoc(collection(db, 'contact_submissions'), submission);
       }
       
       setStatus('success');
       
       setTimeout(() => {
         setStatus('idle');
-        form.reset();
+        setFormValues({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          service: initialService,
+          message: ''
+        });
+        setTouched({});
       }, 3000);
     } catch (error) {
       console.error('Error submitting form', error);
       setStatus('idle');
+      setErrors({ form: 'An error occurred while submitting the form. Please try again.' });
     }
   };
 
@@ -133,60 +175,178 @@ export const LeadGen = ({ simplified = false }) => {
           <AnimatePresence>
             {status === 'success' && (
               <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="absolute inset-0 bg-surface z-20 flex flex-col items-center justify-center p-8 text-center rounded-3xl"
+              >
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 150, damping: 12, delay: 0.1 }}
+                  className="bg-primary/10 p-5 rounded-full mb-6"
+                >
+                  <CheckCircle2 className="w-16 h-16 text-primary" />
+                </motion.div>
+                <motion.h3 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-3xl font-display font-bold text-on-surface mb-3"
+                >
+                  Request Received!
+                </motion.h3>
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-on-surface-variant max-w-sm"
+                >
+                  Thank you! We've successfully received your information and will be in touch shortly to cultivate your project.
+                </motion.p>
+              </motion.div>
+            )}
+            
+            {errors.form && (
+              <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="absolute top-0 left-0 w-full bg-primary-container text-white p-4 text-center font-bold shadow-md z-10 flex items-center justify-center gap-2"
+                className="absolute top-0 left-0 w-full bg-red-500 text-white p-4 text-center font-bold shadow-md z-10 flex items-center justify-center gap-2"
               >
-                <CheckCircle2 className="w-5 h-5 text-primary-fixed" />
-                Request received! We'll be in touch shortly.
+                <AlertCircle className="w-5 h-5 text-white" />
+                {errors.form}
               </motion.div>
             )}
           </AnimatePresence>
 
           <form className="space-y-6" onSubmit={handleSubmit} noValidate>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <div className="flex justify-between items-center">
                   <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">First Name</label>
-                  {errors.firstName && <span className="text-xs text-red-500 font-bold">{errors.firstName}</span>}
                 </div>
-                <input 
-                  type="text" 
-                  name="firstName"
-                  disabled={isDisabled}
-                  placeholder="Aarav" 
-                  className={`w-full bg-surface-container-low border-b-2 ${errors.firstName ? 'border-red-500' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
-                />
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    name="firstName"
+                    value={formValues.firstName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    disabled={isDisabled}
+                    placeholder="Aarav" 
+                    className={`w-full bg-surface-container-low border-b-2 ${touched.firstName && errors.firstName ? 'border-red-500 bg-red-50/5 text-red-500 placeholder-red-300' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
+                  />
+                  <AnimatePresence>
+                    {touched.firstName && errors.firstName && (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute right-3 top-3.5 text-red-500"
+                      >
+                        <AlertCircle className="w-5 h-5" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                <AnimatePresence>
+                  {touched.firstName && errors.firstName && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="text-xs text-red-500 font-bold mt-1"
+                    >
+                      {errors.firstName}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <div className="flex justify-between items-center">
                   <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Last Name</label>
-                  {errors.lastName && <span className="text-xs text-red-500 font-bold">{errors.lastName}</span>}
                 </div>
-                <input 
-                  type="text" 
-                  name="lastName"
-                  disabled={isDisabled}
-                  placeholder="Sharma" 
-                  className={`w-full bg-surface-container-low border-b-2 ${errors.lastName ? 'border-red-500' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
-                />
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    name="lastName"
+                    value={formValues.lastName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    disabled={isDisabled}
+                    placeholder="Sharma" 
+                    className={`w-full bg-surface-container-low border-b-2 ${touched.lastName && errors.lastName ? 'border-red-500 bg-red-50/5 text-red-500 placeholder-red-300' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
+                  />
+                  <AnimatePresence>
+                    {touched.lastName && errors.lastName && (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute right-3 top-3.5 text-red-500"
+                      >
+                        <AlertCircle className="w-5 h-5" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                <AnimatePresence>
+                  {touched.lastName && errors.lastName && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="text-xs text-red-500 font-bold mt-1"
+                    >
+                      {errors.lastName}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div className="space-y-2 relative">
                 <div className="flex justify-between items-center">
                   <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Email Address</label>
-                  {errors.email && <span className="text-xs text-red-500 font-bold">{errors.email}</span>}
                 </div>
-                <input 
-                  type="email" 
-                  name="email"
-                  disabled={isDisabled}
-                  placeholder="aarav@example.com" 
-                  className={`w-full bg-surface-container-low border-b-2 ${errors.email ? 'border-red-500' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
-                />
+                <div className="relative">
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formValues.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    disabled={isDisabled}
+                    placeholder="aarav@example.com" 
+                    className={`w-full bg-surface-container-low border-b-2 ${touched.email && errors.email ? 'border-red-500 bg-red-50/5 text-red-500 placeholder-red-300' : 'border-secondary focus:border-primary-container'} px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed`}
+                  />
+                  <AnimatePresence>
+                    {touched.email && errors.email && (
+                      <motion.div 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute right-3 top-3.5 text-red-500"
+                      >
+                        <AlertCircle className="w-5 h-5" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                <AnimatePresence>
+                  {touched.email && errors.email && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="text-xs text-red-500 font-bold mt-1"
+                    >
+                      {errors.email}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
@@ -195,6 +355,9 @@ export const LeadGen = ({ simplified = false }) => {
                 <input 
                   type="tel" 
                   name="phone"
+                  value={formValues.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   disabled={isDisabled}
                   placeholder="+91 98765 43210" 
                   className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none disabled:opacity-50 disabled:cursor-not-allowed"
@@ -206,13 +369,16 @@ export const LeadGen = ({ simplified = false }) => {
               <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Service of Interest</label>
               <select 
                 name="service"
+                value={formValues.service}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled={isDisabled}
                 className="w-full bg-surface-container-low border-b-2 border-secondary focus:border-primary-container px-4 py-3 rounded-t-lg transition-all outline-none appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <option value="Garden Design">Garden Design</option>
-                <option value="Lawn Care">Lawn Care</option>
-                <option value="Hardscaping">Hardscaping</option>
-                <option value="Seasonal Cleanup">Seasonal Cleanup</option>
+                <option value="Terrace Transformation">Terrace Transformation</option>
+                <option value="Balcony Makeover">Balcony Makeover</option>
+                <option value="Penthouse Transformation">Penthouse Transformation</option>
+                <option value="Institute Green Space">Institute Green Space</option>
                 <option value="General Inquiry">General Inquiry</option>
               </select>
             </div>
@@ -222,6 +388,9 @@ export const LeadGen = ({ simplified = false }) => {
                 <label className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Message (Optional)</label>
                 <textarea 
                   name="message"
+                  value={formValues.message}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   disabled={isDisabled}
                   placeholder="Tell us a bit about your project..." 
                   rows={3}
@@ -233,7 +402,7 @@ export const LeadGen = ({ simplified = false }) => {
             <button 
               type="submit"
               disabled={isDisabled}
-              className="w-full bg-primary-container text-on-primary font-bold py-5 rounded-full hover-lift shadow-xl text-lg mt-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex justify-center items-center gap-2"
+              className="w-full bg-primary-container text-on-primary font-bold py-5 rounded-full shadow-xl text-lg mt-4 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex justify-center items-center gap-2 transition-all duration-500 ease-in-out hover:bg-white hover:text-primary-container hover:shadow-2xl hover:scale-[1.02] border-2 border-transparent hover:border-primary-container hover:-translate-y-1"
             >
               {status === 'submitting' ? (
                 <>
