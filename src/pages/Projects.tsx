@@ -21,7 +21,7 @@ const projects = [
   },
   {
     id: 3,
-    img: 'https://images.unsplash.com/photo-1441924921617-640a3dd9aa51?w=800&q=80',
+    img: 'https://plus.unsplash.com/premium_photo-1661962494793-c686adb46619?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'DHAMPUR GARDENS',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Estate Design',
@@ -35,7 +35,7 @@ const projects = [
   },
   {
     id: 5,
-    img: 'https://images.unsplash.com/photo-1496664445371-fd7acaddcc6d?w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1734079692147-c6fc9438a2d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'AMWAY GREENS',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Corporate Campus',
@@ -49,14 +49,14 @@ const projects = [
   },
   {
     id: 7,
-    img: 'https://images.unsplash.com/photo-1501004318641-b3fae3308d1e?w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1681465766418-6474cfdcbb3c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'SUMADHURA',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Residential Complex',
   },
   {
     id: 8,
-    img: 'https://images.unsplash.com/photo-1510627498534-707ae68c5b16?w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1645526629357-16bbd762c8d5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'CAMPARI GROUP',
     colSpan: 'sm:col-span-1 lg:col-span-2',
     category: 'Commercial HQ',
