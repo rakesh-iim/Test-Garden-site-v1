@@ -74,6 +74,7 @@ export const TestimonialsSection = () => {
                   <img 
                     src={TESTIMONIALS[currentTestimonial].avatar} 
                     alt={TESTIMONIALS[currentTestimonial].name} 
+                    loading="lazy"
                     className="w-16 h-16 rounded-full border-4 border-white/20 object-cover bg-white/10"
                   />
                   <div>
@@ -101,6 +102,7 @@ export const TestimonialsSection = () => {
                   <img 
                     src={test.avatar} 
                     alt={test.name} 
+                    loading="lazy"
                     className="w-10 h-10 rounded-full object-cover"
                   />
                   <div>

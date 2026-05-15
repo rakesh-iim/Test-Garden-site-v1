@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, useInView } from 'motion/react';
 import { Trees } from 'lucide-react';
 import { IMAGES } from '../constants';
@@ -29,6 +30,11 @@ const AnimatedCounter = ({ value, duration = 2, suffix = '' }: { value: number, 
 export const AboutUs = () => {
   return (
     <div className="pt-24 pb-20 max-w-7xl mx-auto px-6">
+      <Helmet>
+        <title>About Us</title>
+        <meta name="description" content="Learn about Urban Oasis, our expert team passionate about crafting bespoke botanical environments. From luxury penthouse transformations to low-maintenance office green spaces." />
+        <meta name="keywords" content="about urban oasis, landscaping experts, botanical environments, garden designers, professional landscapers" />
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,11 +94,13 @@ export const AboutUs = () => {
           <img 
             src={IMAGES.landscaper} 
             alt="Professional landscaper" 
+            loading="lazy"
             className="absolute left-0 top-0 w-[85%] h-[80%] object-cover rounded-2xl ambient-shadow z-10"
           />
           <img 
             src={IMAGES.foliage} 
             alt="Lush foliage" 
+            loading="lazy"
             className="absolute right-0 bottom-0 w-2/3 h-2/3 object-cover rounded-2xl shadow-2xl border-[12px] border-surface z-20"
           />
         </div>

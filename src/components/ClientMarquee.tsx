@@ -61,7 +61,7 @@ const clients = [
 
 export const ClientMarquee = () => {
   return (
-    <section className="pt-20 pb-16 bg-surface overflow-hidden relative z-10">
+    <section className="pt-20 pb-16 bg-transparent overflow-hidden relative z-10">
       <div className="max-w-7xl mx-auto px-6 mb-12">
         <h3 className="text-center text-2xl md:text-3xl font-display font-medium text-on-surface-variant tracking-wide">
           Designed for workplaces of every scale
@@ -69,8 +69,8 @@ export const ClientMarquee = () => {
       </div>
       
       <div className="relative flex overflow-x-hidden group">
-        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
-        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-surface-container-low to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-surface-container-low to-transparent z-10 pointer-events-none"></div>
         
         <div
           className="flex whitespace-nowrap items-center py-4 animate-marquee group-hover:[animation-play-state:paused]"

@@ -8,7 +8,7 @@ export const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/#home' },
     { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Gallery', path: '/gallery' },
@@ -26,15 +26,18 @@ export const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-8 items-center">
-          {navItems.map((item) => (
-            <Link 
-              key={item.name} 
-              to={item.path}
-              className={`text-sm font-semibold inline-block origin-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 hover:text-primary hover:drop-shadow-sm ${location.pathname === item.path ? 'text-primary' : 'text-on-surface-variant'}`}
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = location.pathname + location.hash === item.path || (location.pathname === '/' && location.hash === '' && item.path === '/#home');
+            return (
+              <Link 
+                key={item.name} 
+                to={item.path}
+                className={`text-sm font-semibold inline-block origin-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 hover:text-primary hover:drop-shadow-sm ${isActive ? 'text-primary' : 'text-on-surface-variant'}`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
           <Link to="/contact" className="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-semibold text-sm hover-lift text-center">
             Book a Visit
           </Link>
@@ -56,16 +59,19 @@ export const Navbar = () => {
             className="md:hidden bg-surface border-t border-surface-container-highest overflow-hidden"
           >
             <div className="flex flex-col p-6 gap-4">
-              {navItems.map((item) => (
-                <Link 
-                  key={item.name} 
-                  to={item.path}
-                  className={`text-lg font-semibold ${location.pathname === item.path ? 'text-primary' : 'text-on-surface'}`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive = location.pathname + location.hash === item.path || (location.pathname === '/' && location.hash === '' && item.path === '/#home');
+                return (
+                  <Link 
+                    key={item.name} 
+                    to={item.path}
+                    className={`text-lg font-semibold ${isActive ? 'text-primary' : 'text-on-surface'}`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
               <Link to="/contact" onClick={() => setIsOpen(false)} className="bg-primary-container text-on-primary px-6 py-3 rounded-full font-semibold mt-2 text-center text-base block">
                 Book a Visit
               </Link>

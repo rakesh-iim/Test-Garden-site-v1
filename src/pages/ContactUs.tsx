@@ -1,10 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { LeadGen } from '../components/LeadGen';
 
 export const ContactUs = () => {
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Contact Us</title>
+        <meta name="description" content="Get in touch with Urban Oasis to discuss your next landscaping project. Request a quote for your Terrace, Balcony, Penthouse, or Office green space today." />
+        <meta name="keywords" content="contact urban oasis, landscaping quote, request garden design, hire a landscaper" />
+      </Helmet>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

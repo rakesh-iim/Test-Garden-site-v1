@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, Chrome as ChevronRight, Trees, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -23,6 +24,7 @@ const Hero = () => {
         <img 
           src={IMAGES.hero} 
           alt="Lush garden" 
+          loading="lazy"
           className="w-full h-full object-cover opacity-80 mix-blend-multiply"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent" />
@@ -64,32 +66,36 @@ const Hero = () => {
 const Expertise = () => {
   const services = [
     {
-      title: "Garden Design",
-      desc: "Expertly curated layouts that balance saturated botanical tones with pristine structures, ensuring a premium feel tailored to your estate.",
+      title: "Terrace Transformation",
+      id: "terrace-transformation",
+      desc: "Turn your underutilized rooftop or terrace into a sky-high sanctuary. We design bespoke urban gardens with custom planters, optimal drainage, and resilient planting schemes.",
       icon: Palette,
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
       large: true,
-      image: IMAGES.blueprints
+      image: "https://images.unsplash.com/photo-1600607688066-890987f18a86?auto=format&fit=crop&q=80"
     },
     {
-      title: "Lawn Care",
-      desc: "Precision mowing, aeration, and fertilization to maintain a vibrant, high-energy green canvas.",
+      title: "Balcony Makeover",
+      id: "balcony-makeover",
+      desc: "Maximize limited space with vertical gardens, custom-built seating, and curated container planting to create a lush, intimate retreat right outside your door.",
       icon: Sprout,
       color: "bg-primary-container",
       textColor: "text-on-primary",
       theme: "dark"
     },
     {
-      title: "Hardscaping",
-      desc: "Structurally sound stonework, pathways, and patios that provide architectural \"breathing room\" amidst organic elements.",
+      title: "Penthouse Transformation",
+      id: "penthouse-transformation",
+      desc: "Elevate your penthouse exteriors with luxury landscaping, incorporating architectural stonework, dynamic lighting, and elegant, wind-resilient flora.",
       icon: Grid2X2,
       color: "bg-secondary-container/30",
       textColor: "text-on-secondary-container"
     },
     {
-      title: "Seasonal Cleanup",
-      desc: "Rigorous maintenance to clear debris and prepare your landscape for optimal growth in the upcoming season.",
+      title: "Office Landscaping",
+      id: "office-landscaping",
+      desc: "Develop vibrant, low-maintenance green spaces for educational or corporate campuses, establishing outdoor areas that inspire collaboration and provide a natural haven.",
       icon: Leaf,
       color: "bg-tertiary-container/10",
       textColor: "text-tertiary-container",
@@ -131,14 +137,14 @@ const Expertise = () => {
             whileHover={{ y: -8, scale: 1.02, transition: { type: "spring", stiffness: 400, damping: 25 } }}
             className={`
               ${s.large ? 'md:col-span-8' : i === 1 ? 'md:col-span-4' : 'md:col-span-6'}
-              rounded-2xl p-8 ambient-shadow relative overflow-hidden group transition-colors duration-300
-              ${s.theme === 'dark' ? 'bg-primary-container hover:bg-primary-container/80 text-white shadow-lg' : 'bg-surface-container-lowest hover:bg-surface-container text-on-surface hover:shadow-xl border border-surface-container-low'}
+              rounded-2xl p-8 ambient-shadow relative overflow-hidden group transition-colors duration-500
+              ${s.theme === 'dark' ? 'bg-primary hover:bg-secondary text-white shadow-lg' : 'bg-surface-container-lowest hover:bg-surface-container text-on-surface hover:shadow-xl border border-surface-container-low'}
               ${s.border || ''}
             `}
           >
             {s.image && (
               <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                <img src={s.image} alt="" className="w-full h-full object-cover" />
+                <img src={s.image} loading="lazy" alt="" className="w-full h-full object-cover" />
               </div>
             )}
             <div className="relative z-10 flex flex-col justify-between h-full">
@@ -152,11 +158,9 @@ const Expertise = () => {
                   {s.desc}
                 </p>
               </div>
-              {!s.theme && (
-                <Link to="/services" className={`flex items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : 'text-primary-container group-hover:text-primary'} hover:underline group-hover:gap-2 transition-all`}>
-                  Learn more <ChevronRight className="w-4 h-4" />
-                </Link>
-              )}
+              <Link to={`/services/${s.id}`} className={`flex items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : 'text-primary-container group-hover:text-primary'} hover:underline group-hover:gap-2 transition-all`}>
+                Learn more <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.div>
         ))}
@@ -168,15 +172,35 @@ const Expertise = () => {
 export const Home = () => {
   return (
     <>
-      <Hero />
-      <Expertise />
-      <div className="max-w-7xl mx-auto px-6">
-        <hr className="border-t border-black/10 dark:border-white/10" />
+      <Helmet>
+        <title>Urban Oasis | Expert Landscape Design & Transformation</title>
+        <meta name="description" content="Urban Oasis provides professional landscaping services. Specializing in high-end terrace transformations, balcony makeovers, and commercial office landscaping." />
+        <meta name="keywords" content="expert landscape design, urban landscaping, terrace transformations, bespoke outdoor spaces, landscaping services" />
+      </Helmet>
+      
+      <div id="home">
+        <Hero />
       </div>
-      <LandscapesInAction />
-      <TestimonialsSection />
-      <ClientMarquee />
-      <LeadGen simplified={true} />
+      
+      <div id="services" className="bg-surface relative z-10">
+        <Expertise />
+      </div>
+      
+      <div id="projects" className="bg-surface-container-lowest border-y border-black/5 dark:border-white/5 relative z-10">
+        <LandscapesInAction />
+      </div>
+      
+      <div id="testimonials" className="bg-surface relative z-10">
+        <TestimonialsSection />
+      </div>
+      
+      <div className="bg-surface-container-low border-y border-black/5 dark:border-white/5 relative z-10">
+        <ClientMarquee />
+      </div>
+      
+      <div id="contact" className="bg-surface relative z-10">
+        <LeadGen simplified={true} />
+      </div>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { PORTFOLIO_ITEMS } from '../constants';
 import { ArrowLeft, ExternalLink, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
@@ -30,11 +31,17 @@ export const GalleryDetail = () => {
 
   return (
     <div className="pt-20 pb-24">
+      <Helmet>
+        <title>{project.title} | Project Details</title>
+        <meta name="description" content={`View details for ${project.title}, a landscaping project by Urban Oasis in ${project.location}.`} />
+        <meta name="keywords" content={`landscaping project, ${project.category.toLowerCase()}, urban oasis, ${project.location}`} />
+      </Helmet>
       {/* Hero Section */}
       <div className="relative h-[60vh] min-h-[400px] w-full bg-surface-container-low mb-16">
         <img 
           src={project.img} 
           alt={project.title} 
+          loading="lazy"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
@@ -89,14 +96,24 @@ export const GalleryDetail = () => {
               ))}
             </div>
 
-            {/* A placeholder for more images if available, we'll just show the hero image again to simulate gallery */}
+            {/* Project Gallery - Masonry Layout */}
             <h3 className="text-2xl font-display font-bold mb-6 text-on-surface">Project Gallery</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="aspect-square rounded-2xl overflow-hidden bg-surface-container-low">
-                <img src={project.img} alt={`${project.title} detail`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <div className="columns-1 sm:columns-2 gap-4 space-y-4">
+              <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">
+                <img loading="lazy" src={project.img} alt={`${project.title} overall view`} className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
               </div>
-              <div className="aspect-square rounded-2xl overflow-hidden bg-surface-container-low">
-                <img src={project.img} alt={`${project.title} alternate view`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 [filter:contrast(1.1)_brightness(0.9)]" />
+              <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" alt={`${project.title} detail view`} className="w-full h-[300px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
+              </div>
+              <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1558904541-efa843a96f0f?auto=format&fit=crop&q=80&w=800" alt={`${project.title} alternate angle`} className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
+              </div>
+              <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">
+                <img loading="lazy" src={project.img} alt={`${project.title} wide shot`} className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105 [filter:brightness(1.1)_contrast(1.1)]" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
               </div>
             </div>
           </motion.div>
@@ -146,6 +163,7 @@ export const GalleryDetail = () => {
                 <img 
                   src={rel.img} 
                   alt={rel.title} 
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />

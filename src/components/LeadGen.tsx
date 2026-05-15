@@ -53,7 +53,8 @@ export const LeadGen = ({ simplified = false }) => {
     const newErrors: Record<string, string> = {};
     const newTouched: Record<string, boolean> = {};
     
-    Object.entries(formValues).forEach(([key, value]) => {
+    Object.entries(formValues).forEach(([key, val]) => {
+      const value = val as string;
       newTouched[key] = true;
       const error = validateField(key, value);
       if (error) newErrors[key] = error;
@@ -78,7 +79,7 @@ export const LeadGen = ({ simplified = false }) => {
         message: formValues.message.trim() || (formValues.service ? `Interested in: ${formValues.service}` : '')
       };
 
-      const googleSheetUrl = import.meta.env.VITE_GOOGLE_SHEET_URL;
+      const googleSheetUrl = (import.meta as any).env?.VITE_GOOGLE_SHEET_URL;
 
       if (googleSheetUrl) {
         // Send to Google Sheets via Google Apps Script

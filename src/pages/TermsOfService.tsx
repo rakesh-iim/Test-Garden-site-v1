@@ -1,8 +1,14 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export const TermsOfService = () => {
   return (
     <div className="pt-32 pb-20 max-w-4xl mx-auto px-6">
+      <Helmet>
+        <title>Terms of Service</title>
+        <meta name="description" content="Review the Terms of Service for Urban Oasis. Understand the rules, guidelines, and agreements for using our landscaping services and website." />
+        <meta name="keywords" content="terms of service, terms and conditions, user agreement, urban oasis terms" />
+      </Helmet>
       <h1 className="text-4xl font-display font-bold mb-8 text-on-surface">Terms of Service</h1>
       <div className="prose prose-lg dark:prose-invert">
         <p className="text-on-surface-variant mb-6">

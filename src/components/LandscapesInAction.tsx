@@ -7,55 +7,55 @@ const projects = [
     id: 1,
     img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
     title: 'HERO ESTATES',
-    colSpan: 'md:col-span-2',
+    colSpan: 'sm:col-span-2 lg:col-span-2',
   },
   {
     id: 2,
     img: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80',
     title: 'DLF BOTANICALS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
   },
   {
     id: 3,
-    img: 'https://images.unsplash.com/photo-1441924921617-640a3dd9aa51?w=800&q=80',
+    img: 'https://plus.unsplash.com/premium_photo-1661962494793-c686adb46619?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'DHAMPUR GARDENS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
   },
   {
     id: 4,
     img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80',
     title: 'PIONEER URBAN',
-    colSpan: 'md:col-span-2',
+    colSpan: 'sm:col-span-2 lg:col-span-2',
   },
   {
     id: 5,
-    img: 'https://images.unsplash.com/photo-1496664445371-fd7acaddcc6d?w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1734079692147-c6fc9438a2d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'AMWAY GREENS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
   },
   {
     id: 6,
     img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
     title: 'THE INDIAN GARDEN',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
   },
   {
     id: 7,
-    img: 'https://images.unsplash.com/photo-1501004318641-b3fae3308d1e?w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1681465766418-6474cfdcbb3c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'SUMADHURA',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
   },
   {
     id: 8,
-    img: 'https://images.unsplash.com/photo-1510627498534-707ae68c5b16?w=800&q=80',
+    img: 'https://images.unsplash.com/photo-1645526629357-16bbd762c8d5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     title: 'CAMPARI GROUP',
-    colSpan: 'md:col-span-2',
+    colSpan: 'sm:col-span-1 lg:col-span-2',
   },
   {
     id: 9,
     img: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&q=80',
     title: 'VERDANT VISTAS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-2 lg:col-span-1',
   }
 ];
 
@@ -74,19 +74,20 @@ export const LandscapesInAction = () => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-        {projects.map((project, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {projects.slice(0, 6).map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-            className={`relative group overflow-hidden bg-surface-container-low h-[300px] md:h-[420px] ${project.colSpan}`}
+            className={`relative group overflow-hidden bg-surface-container-low rounded-2xl h-[300px] md:h-[400px] ${project.colSpan}`}
           >
             <img 
               src={project.img} 
               alt={project.title} 
+              loading="lazy"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

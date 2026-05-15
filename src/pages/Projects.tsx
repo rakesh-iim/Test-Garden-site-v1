@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -8,63 +9,63 @@ const projects = [
     id: 1,
     img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
     title: 'HERO ESTATES',
-    colSpan: 'md:col-span-2',
+    colSpan: 'sm:col-span-2 lg:col-span-2',
     category: 'Commercial Landscaping',
   },
   {
     id: 2,
     img: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80',
     title: 'DLF BOTANICALS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Botanical Garden',
   },
   {
     id: 3,
     img: 'https://images.unsplash.com/photo-1441924921617-640a3dd9aa51?w=800&q=80',
     title: 'DHAMPUR GARDENS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Estate Design',
   },
   {
     id: 4,
     img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80',
     title: 'PIONEER URBAN',
-    colSpan: 'md:col-span-2',
+    colSpan: 'sm:col-span-2 lg:col-span-2',
     category: 'Urban Renewal',
   },
   {
     id: 5,
     img: 'https://images.unsplash.com/photo-1496664445371-fd7acaddcc6d?w=800&q=80',
     title: 'AMWAY GREENS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Corporate Campus',
   },
   {
     id: 6,
     img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
     title: 'THE INDIAN GARDEN',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Heritage Restoration',
   },
   {
     id: 7,
     img: 'https://images.unsplash.com/photo-1501004318641-b3fae3308d1e?w=800&q=80',
     title: 'SUMADHURA',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Residential Complex',
   },
   {
     id: 8,
     img: 'https://images.unsplash.com/photo-1510627498534-707ae68c5b16?w=800&q=80',
     title: 'CAMPARI GROUP',
-    colSpan: 'md:col-span-2',
+    colSpan: 'sm:col-span-1 lg:col-span-2',
     category: 'Commercial HQ',
   },
   {
     id: 9,
     img: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&q=80',
     title: 'VERDANT VISTAS',
-    colSpan: 'md:col-span-1',
+    colSpan: 'sm:col-span-2 lg:col-span-1',
     category: 'Master Planning',
   }
 ];
@@ -72,8 +73,13 @@ const projects = [
 export const Projects = () => {
   return (
     <div className="pt-24 pb-20 max-w-7xl mx-auto px-6">
+      <Helmet>
+        <title>Our Projects</title>
+        <meta name="description" content="Explore our featured landscaping projects. See how Urban Oasis transforms urban spaces into lush green sanctuaries with tailored design and resilient planting." />
+        <meta name="keywords" content="landscaping projects, case studies, urban garden design projects, tailored landscaping" />
+      </Helmet>
       <div className="mb-12">
-        <Link to="/" className="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary font-medium mb-6 transition-colors">
+        <Link to="/" className="inline-flex items-center gap-2 text-primary font-medium hover:underline mb-8 hover:text-primary-container transition-colors">
           <ArrowLeft size={18} />
           Back to Home
         </Link>
@@ -89,14 +95,14 @@ export const Projects = () => {
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-            className={`relative group overflow-hidden bg-surface-container-low rounded-xl h-[400px] ${project.colSpan === 'md:col-span-2' ? 'lg:col-span-2 md:col-span-2' : ''}`}
+            className={`relative group overflow-hidden bg-surface-container-low rounded-xl h-[400px] ${project.colSpan}`}
           >
             <img 
               src={project.img} 

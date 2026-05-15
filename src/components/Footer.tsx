@@ -8,7 +8,7 @@ export const Footer = () => (
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
         <div className="flex items-center gap-2 md:mr-10">
           <Link to="/" className="flex items-center">
-            <img src="/logo.png" alt="MrGardenr Logo" className="h-12 sm:h-14 scale-[1.8] sm:scale-[2.2] origin-center md:origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-1 -translate-x-1 sm:-translate-x-3" />
+            <img src="/logo.png" alt="MrGardenr Logo" loading="lazy" className="h-12 sm:h-14 scale-[1.8] sm:scale-[2.2] origin-center md:origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-1 -translate-x-1 sm:-translate-x-3" />
           </Link>
         </div>
         <div className="hidden md:block w-px h-6 bg-black/10 mx-2" />

@@ -1,8 +1,14 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export const PrivacyPolicy = () => {
   return (
     <div className="pt-32 pb-20 max-w-4xl mx-auto px-6">
+      <Helmet>
+        <title>Privacy Policy</title>
+        <meta name="description" content="Read the Urban Oasis Privacy Policy. Learn how we handle, protect, and process your personal information and data." />
+        <meta name="keywords" content="privacy policy, data protection, privacy statement, urban oasis privacy" />
+      </Helmet>
       <h1 className="text-4xl font-display font-bold mb-8 text-on-surface">Privacy Policy</h1>
       <div className="prose prose-lg dark:prose-invert">
         <p className="text-on-surface-variant mb-6">
