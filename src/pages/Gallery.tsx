@@ -1,43 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { PORTFOLIO_ITEMS } from '../constants';
 import { Facebook, Twitter, Linkedin, MapPin, Calendar, Maximize2, X, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const getOptimizedSrcSet = (url: string) => {
-  if (!url.includes('unsplash.com')) return undefined;
-  try {
-    const baseUrl = url.split('?')[0];
-    const params = new URLSearchParams(url.split('?')[1]);
-    params.set('auto', 'format');
-    params.set('fit', 'crop');
-    params.set('q', '80');
-    
-    const sizes = [400, 800, 1200];
-    return sizes.map(w => {
-      params.set('w', w.toString());
-      return `${baseUrl}?${params.toString()} ${w}w`;
-    }).join(', ');
-  } catch (e) {
-    return undefined;
-  }
-};
-
-const getHighResUrl = (url: string) => {
-  if (!url.includes('unsplash.com')) return url;
-  try {
-    const baseUrl = url.split('?')[0];
-    const params = new URLSearchParams(url.split('?')[1]);
-    params.set('auto', 'format');
-    params.set('fit', 'crop');
-    params.set('q', '90');
-    params.set('w', '2000');
-    return `${baseUrl}?${params.toString()}`;
-  } catch (e) {
-    return url;
-  }
-};
 
 export const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -134,7 +100,7 @@ export const Gallery = () => {
               visible: { transition: { staggerChildren: 0.1 } },
               hidden: {}
             }}
-            className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {filteredItems.map((it, i) => (
               <motion.div 
@@ -143,21 +109,18 @@ export const Gallery = () => {
                   hidden: { opacity: 0, y: 20, scale: 0.95 },
                   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
                 }}
-                className="group w-full break-inside-avoid"
+                className="group w-full"
               >
                 <Link to={`/gallery/${it.id}`} className="block cursor-pointer">
-                  <div className="relative overflow-hidden rounded-2xl mb-6 ambient-shadow bg-surface-container-low">
+                  <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6 ambient-shadow bg-surface-container-low">
                     {/* Placeholder while image lazy loads initially */}
                     <div className="absolute inset-0 bg-surface-container/50 animate-pulse" />
                     
                     <img 
                       src={it.img} 
-                      srcSet={getOptimizedSrcSet(it.img)}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       alt={it.title} 
                       loading="lazy"
-                      decoding="async"
-                      className="relative z-10 w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110" 
+                      className="relative z-10 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                     />
                     
                     <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
@@ -237,9 +200,8 @@ export const Gallery = () => {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: isImageLoading ? 0.95 : 1, opacity: isImageLoading ? 0 : 1 }}
                 transition={{ duration: 0.4 }}
-                src={selectedImage ? getHighResUrl(selectedImage) : undefined} 
+                src={selectedImage} 
                 alt="Expanded view" 
-                decoding="async"
                 className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
                 onLoad={() => setIsImageLoading(false)}
               />
