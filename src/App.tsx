@@ -6,6 +6,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
@@ -64,6 +65,7 @@ export default function App() {
           </main>
           <Footer />
           <BackToTop />
+          <SpeedInsights />
         </div>
       </BrowserRouter>
     </HelmetProvider>
