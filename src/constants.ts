@@ -1,11 +1,11 @@
 export const IMAGES = {
   hero: "https://images.unsplash.com/uploads/1411901100260f56b39b9/ab70b250?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   blueprints: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
-  project1: "https://images.unsplash.com/photo-1558904541-efa843a96f0f?q=80&w=1200&auto=format&fit=crop",
+  project1: "https://images.unsplash.com/photo-1577566997011-307e150970dc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   project2: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop",
-  project3: "https://images.unsplash.com/photo-1576013551627-119711606d21?q=80&w=1200&auto=format&fit=crop",
+  project3: "https://images.unsplash.com/photo-1546580594-a64816022c1b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   landscaper: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?q=80&w=1200&auto=format&fit=crop",
-  foliage: "https://images.unsplash.com/photo-1628151015968-3a4429e9ef04?q=80&w=1200&auto=format&fit=crop"
+  foliage: "https://images.unsplash.com/photo-1444392061186-9fc38f84f726?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 };
 
 export const TESTIMONIALS = [

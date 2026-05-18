@@ -50,7 +50,7 @@ const Hero = () => {
             Transform your outdoor space into a vibrant, high-energy sanctuary. We blend professional precision with organic vitality to create tropical environments that breathe.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="relative overflow-hidden group bg-primary-container text-on-primary font-bold px-8 py-4 rounded-full flex items-center gap-3 w-fit shadow-lg border border-transparent transition-transform duration-300 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1">
+            <Link to="/contact#book" className="relative overflow-hidden group bg-primary-container text-on-primary font-bold px-8 py-4 rounded-full flex items-center gap-3 w-fit shadow-lg border border-transparent transition-transform duration-300 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1">
               <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
               <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Get a Free Quote</span>
               <ArrowRight className="w-5 h-5 relative z-10 group-hover:text-primary-container transition-all duration-[0.5s] group-hover:translate-x-1" />

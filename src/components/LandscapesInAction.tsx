@@ -104,9 +104,10 @@ export const LandscapesInAction = () => {
       <div className="mt-12 flex justify-center">
         <Link 
           to="/projects" 
-          className="bg-[#141414] hover:bg-black text-white w-full sm:w-[500px] py-4 rounded-md font-medium text-center flex items-center justify-center transition-colors"
+          className="relative overflow-hidden group bg-[#141414] text-white w-full sm:w-[500px] py-4 rounded-md font-medium text-center flex items-center justify-center shadow-sm transition-transform duration-300 hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5"
         >
-          See all projects &rarr;
+          <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+          <span className="relative z-10 group-hover:text-[#141414] transition-colors duration-[0.5s] flex items-center gap-1">See all projects &rarr;</span>
         </Link>
       </div>
     </section>

@@ -145,7 +145,7 @@ export const GalleryDetail = () => {
             
             <div className="pt-6 border-t border-surface-container-highest">
               <h4 className="font-display font-bold mb-4">Like what you see?</h4>
-              <Link to="/contact" className="flex items-center justify-center gap-2 w-full bg-primary-container text-on-primary font-bold py-4 rounded-xl hover-lift shadow-md">
+              <Link to="/contact#book" className="flex items-center justify-center gap-2 w-full bg-primary-container text-on-primary font-bold py-4 rounded-xl hover-lift shadow-md">
                 Start Your Project
               </Link>
             </div>

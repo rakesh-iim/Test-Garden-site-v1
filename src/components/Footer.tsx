@@ -8,7 +8,7 @@ export const Footer = () => (
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
         <div className="flex items-center gap-2 md:mr-10">
           <Link to="/" className="flex items-center">
-            <img src="/logo.png" alt="MrGardenr Logo" loading="lazy" className="h-12 sm:h-14 scale-[1.8] sm:scale-[2.2] origin-center md:origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-1 -translate-x-1 sm:-translate-x-3" />
+            <img src="/logo.png" alt="MrGardenr Logo" loading="lazy" className="h-12 sm:h-14 scale-[1.8] sm:scale-[2.2] origin-center md:origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-1 -translate-x-3 sm:-translate-x-6" />
           </Link>
         </div>
         <div className="hidden md:block w-px h-6 bg-black/10 mx-2" />
@@ -17,7 +17,7 @@ export const Footer = () => (
         </p>
       </div>
 
-      <div className="flex items-center justify-center gap-4 md:gap-8 hide-scrollbar overflow-x-auto w-full md:w-auto">
+      <div className="flex md:hidden items-center justify-center gap-4 md:gap-8 hide-scrollbar overflow-x-auto w-full md:w-auto">
         <Link to="/services" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Services</Link>
         <Link to="/about" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">About Us</Link>
         <Link to="/gallery" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Gallery Showcase</Link>

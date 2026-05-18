@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Building2, Phone, Mail, Clock, Navigation } from 'lucide-react';
 
-const locations = [
+type Location = {
+  id: string;
+  city: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  hours?: string;
+  mapSrc?: string;
+  directionsLink?: string;
+  comingSoon?: boolean;
+};
+
+const locations: Location[] = [
   {
     id: 'ahmedabad',
     city: 'Ahmedabad',
@@ -36,13 +48,29 @@ const locations = [
   {
     id: 'bangalore',
     city: 'Bangalore',
+    comingSoon: true,
+    /*
     address: 'MrGardenr, HSR Layout, Bangalore, Karnataka 560102',
     phone: '+91-9761655546',
     email: 'hello@mrgardenr.in',
     hours: 'Mon - Sat: 10:00 AM - 7:00 PM',
     mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497511.23476138!2d77.3500!3d12.9538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000003',
     directionsLink: 'https://www.google.com/maps/search/Mr+Gardenr+HSR+Layout+Bangalore'
-  }
+    */
+  },
+  {
+    id: 'pune',
+    city: 'Pune',
+    comingSoon: true,
+    /*
+    address: 'MrGardenr, HSR Layout, Bangalore, Karnataka 560102',
+    phone: '+91-9761655546',
+    email: 'hello@mrgardenr.in',
+    hours: 'Mon - Sat: 10:00 AM - 7:00 PM',
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497511.23476138!2d77.3500!3d12.9538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000003',
+    directionsLink: 'https://www.google.com/maps/search/Mr+Gardenr+HSR+Layout+Bangalore'
+    */
+  },  
 ];
 
 export const StoreLocator = () => {
@@ -94,23 +122,40 @@ export const StoreLocator = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] bg-white rounded-3xl overflow-hidden shadow-xl border border-surface-container-low"
+                className={`grid grid-cols-1 ${activeLocation.comingSoon ? '' : 'lg:grid-cols-[1.2fr_1fr]'} bg-white rounded-3xl overflow-hidden shadow-xl border border-surface-container-low`}
               >
-                <div className="relative min-h-[380px] lg:min-h-full bg-surface-container-low">
-                  <iframe
-                    src={activeLocation.mapSrc}
-                    className="absolute inset-0 w-full h-full border-none"
-                    allowFullScreen
-                    loading="lazy"
-                    title={`${activeLocation.city} Location Map`}
-                  ></iframe>
-                </div>
-                
-                <div className="p-8 lg:p-10 flex flex-col justify-center">
-                  <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-6 w-fit">
-                    <Building2 className="w-4 h-4" />
-                    {activeLocation.city} Office
+                {activeLocation.comingSoon ? (
+                  <div className="flex flex-col items-center justify-center p-12 text-center bg-surface-container-low min-h-[400px]">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
+                      <MapPin className="w-10 h-10 text-primary" />
+                    </div>
+                    <h3 className="font-display text-4xl font-bold text-on-surface mb-4">
+                      {activeLocation.city}
+                    </h3>
+                    <p className="text-xl text-on-surface-variant max-w-lg mx-auto mb-8">
+                      We're bringing our premier landscaping services to {activeLocation.city} soon. Stay tuned!
+                    </p>
+                    <span className="inline-flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-full">
+                      Coming Soon
+                    </span>
                   </div>
+                ) : (
+                  <>
+                    <div className="relative min-h-[380px] lg:min-h-full bg-surface-container-low">
+                      <iframe
+                        src={activeLocation.mapSrc}
+                        className="absolute inset-0 w-full h-full border-none"
+                        allowFullScreen
+                        loading="lazy"
+                        title={`${activeLocation.city} Location Map`}
+                      ></iframe>
+                    </div>
+                    
+                    <div className="p-8 lg:p-10 flex flex-col justify-center">
+                      <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-sm font-semibold mb-6 w-fit">
+                        <Building2 className="w-4 h-4" />
+                        {activeLocation.city} Office
+                      </div>
                   
                   <h3 className="font-display text-3xl font-bold text-on-surface mb-6">
                     {activeLocation.city}
@@ -141,12 +186,15 @@ export const StoreLocator = () => {
                     href={activeLocation.directionsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-xl hover:bg-primary-container/90 transition-colors w-fit mt-2"
+                    className="relative overflow-hidden group inline-flex items-center justify-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full shadow-sm transition-transform duration-300 hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5 w-fit mt-2"
                   >
-                    <Navigation className="w-4 h-4" />
-                    Get Directions
+                    <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+                    <Navigation className="w-4 h-4 relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]" />
+                    <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Get Directions</span>
                   </a>
                 </div>
+                </>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
