@@ -27,7 +27,7 @@ const Hero = () => {
           loading="lazy"
           className="w-full h-full object-cover opacity-80 mix-blend-multiply"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-black/40" />
       </motion.div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
@@ -49,12 +49,14 @@ const Hero = () => {
             Transform your outdoor space into a vibrant, high-energy sanctuary. We blend professional precision with organic vitality to create tropical environments that breathe.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link to="/contact" className="bg-primary-container text-on-primary font-bold px-8 py-4 rounded-full hover-lift shadow-lg flex items-center gap-3 w-fit">
-              Get a Free Quote
-              <ArrowRight className="w-5 h-5" />
+            <Link to="/contact" className="relative overflow-hidden group bg-primary-container text-on-primary font-bold px-8 py-4 rounded-full flex items-center gap-3 w-fit shadow-lg border border-transparent transition-transform duration-300 hover:shadow-2xl hover:scale-[1.03] hover:-translate-y-1">
+              <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+              <span className="relative z-10 group-hover:text-primary-container transition-colors duration-[0.5s]">Get a Free Quote</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:text-primary-container transition-all duration-[0.5s] group-hover:translate-x-1" />
             </Link>
-            <Link to="/gallery" className="border-2 border-secondary text-secondary font-bold px-8 py-4 rounded-full hover:bg-secondary/5 transition-colors w-fit text-center">
-              View Gallery
+            <Link to="/gallery" className="relative overflow-hidden group border-2 border-secondary text-secondary font-bold px-8 py-4 rounded-full transition-transform duration-300 hover:shadow-xl hover:scale-[1.03] hover:-translate-y-1 w-fit text-center">
+              <span className="absolute inset-0 w-full h-full bg-secondary origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+              <span className="relative z-10 group-hover:text-surface transition-colors duration-[0.5s]">View Gallery</span>
             </Link>
           </div>
         </motion.div>
@@ -82,7 +84,7 @@ const Expertise = () => {
       icon: Sprout,
       color: "bg-primary-container",
       textColor: "text-on-primary",
-      theme: "dark"
+      theme: "magnetic"
     },
     {
       title: "Penthouse Transformation",
@@ -138,10 +140,13 @@ const Expertise = () => {
             className={`
               ${s.large ? 'md:col-span-8' : i === 1 ? 'md:col-span-4' : 'md:col-span-6'}
               rounded-2xl p-8 ambient-shadow relative overflow-hidden group transition-colors duration-500
-              ${s.theme === 'dark' ? 'bg-primary hover:bg-secondary text-white shadow-lg' : 'bg-surface-container-lowest hover:bg-surface-container text-on-surface hover:shadow-xl border border-surface-container-low'}
+              ${s.theme === 'dark' ? 'bg-primary hover:bg-secondary text-white shadow-lg' : s.theme === 'magnetic' ? 'bg-primary-container text-on-primary shadow-lg' : 'bg-surface-container-lowest hover:bg-surface-container text-on-surface hover:shadow-xl border border-surface-container-low'}
               ${s.border || ''}
             `}
           >
+            {s.theme === 'magnetic' && (
+              <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+            )}
             {s.image && (
               <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 group-hover:opacity-20 transition-opacity duration-500">
                 <img src={s.image} loading="lazy" alt="" className="w-full h-full object-cover" />
@@ -150,15 +155,15 @@ const Expertise = () => {
             <div className="relative z-10 flex flex-col justify-between h-full">
               <div>
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6
-                  ${s.theme === 'dark' ? 'bg-white/20' : s.color} ${s.textColor}`}>
-                  <s.icon className="w-6 h-6 transform transition-transform duration-300 group-hover:scale-110" />
+                  ${s.theme === 'dark' ? 'bg-white/20' : s.theme === 'magnetic' ? 'bg-white/20 group-hover:bg-primary-container/10 transition-colors duration-[0.5s]' : s.color} ${s.theme === 'magnetic' ? 'text-on-primary' : s.textColor}`}>
+                  <s.icon className={`w-6 h-6 transform transition-transform duration-300 group-hover:scale-110 ${s.theme === 'magnetic' ? 'group-hover:text-primary-container transition-colors duration-[0.5s]' : ''}`} />
                 </div>
-                <h3 className={`text-2xl font-display font-bold mb-3 ${s.theme === 'dark' ? 'text-white' : 'text-on-surface group-hover:text-primary transition-colors'}`}>{s.title}</h3>
-                <p className={`${s.theme === 'dark' ? 'text-white/80 group-hover:text-white transition-colors' : 'text-on-surface-variant group-hover:text-on-surface transition-colors'} mb-6 leading-relaxed`}>
+                <h3 className={`text-2xl font-display font-bold mb-3 ${s.theme === 'dark' ? 'text-white' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-on-surface group-hover:text-primary transition-colors'}`}>{s.title}</h3>
+                <p className={`${s.theme === 'dark' ? 'text-white/80 group-hover:text-white transition-colors' : s.theme === 'magnetic' ? 'text-on-primary/90 group-hover:text-primary-container/90 transition-colors duration-[0.5s]' : 'text-on-surface-variant group-hover:text-on-surface transition-colors'} mb-6 leading-relaxed`}>
                   {s.desc}
                 </p>
               </div>
-              <Link to={`/services/${s.id}`} className={`flex items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : 'text-primary-container group-hover:text-primary'} hover:underline group-hover:gap-2 transition-all`}>
+              <Link to={`/services/${s.id}`} className={`flex items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-primary-container group-hover:text-primary'} hover:underline group-hover:gap-2 transition-all`}>
                 Learn more <ChevronRight className="w-4 h-4" />
               </Link>
             </div>

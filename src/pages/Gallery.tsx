@@ -1,9 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'motion/react';
 import { PORTFOLIO_ITEMS } from '../constants';
 import { Facebook, Twitter, Linkedin, MapPin, Calendar, Maximize2, X, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+const getOptimizedSrcSet = (url: string) => {
+  if (!url.includes('unsplash.com')) return undefined;
+  try {
+    const baseUrl = url.split('?')[0];
+    const params = new URLSearchParams(url.split('?')[1]);
+    params.set('auto', 'format');
+    params.set('fit', 'crop');
+    params.set('q', '80');
+    
+    const sizes = [400, 800, 1200];
+    return sizes.map(w => {
+      params.set('w', w.toString());
+      return `${baseUrl}?${params.toString()} ${w}w`;
+    }).join(', ');
+  } catch (e) {
+    return undefined;
+  }
+};
+
+const getHighResUrl = (url: string) => {
+  if (!url.includes('unsplash.com')) return url;
+  try {
+    const baseUrl = url.split('?')[0];
+    const params = new URLSearchParams(url.split('?')[1]);
+    params.set('auto', 'format');
+    params.set('fit', 'crop');
+    params.set('q', '90');
+    params.set('w', '2000');
+    return `${baseUrl}?${params.toString()}`;
+  } catch (e) {
+    return url;
+  }
+};
 
 export const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -118,8 +152,11 @@ export const Gallery = () => {
                     
                     <img 
                       src={it.img} 
+                      srcSet={getOptimizedSrcSet(it.img)}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       alt={it.title} 
                       loading="lazy"
+                      decoding="async"
                       className="relative z-10 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                     />
                     
@@ -200,8 +237,9 @@ export const Gallery = () => {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: isImageLoading ? 0.95 : 1, opacity: isImageLoading ? 0 : 1 }}
                 transition={{ duration: 0.4 }}
-                src={selectedImage} 
+                src={selectedImage ? getHighResUrl(selectedImage) : undefined} 
                 alt="Expanded view" 
+                decoding="async"
                 className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
                 onLoad={() => setIsImageLoading(false)}
               />
