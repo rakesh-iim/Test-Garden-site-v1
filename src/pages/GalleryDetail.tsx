@@ -11,7 +11,7 @@ export const GalleryDetail = () => {
 
   if (!project) {
     return (
-      <div className="pt-32 pb-20 max-w-7xl mx-auto px-6 text-center">
+      <div className="pt-32 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 text-center">
         <h1 className="text-4xl font-display font-bold mb-4">Project Not Found</h1>
         <p className="text-on-surface-variant mb-8">The project you are looking for does not exist or has been removed.</p>
         <Link to="/gallery" className="inline-flex items-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full hover-lift shadow-lg">
@@ -45,7 +45,7 @@ export const GalleryDetail = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
-          <div className="max-w-7xl mx-auto px-6 pb-12 w-full">
+          <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24 pb-12 w-full">
             <Link to="/gallery" className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium mb-6 transition-colors">
               <ArrowLeft size={18} />
               Back to Gallery
@@ -75,7 +75,7 @@ export const GalleryDetail = () => {
       </div>
 
       {/* Content Section */}
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 grid grid-cols-1 lg:grid-cols-3 gap-16">
         <div className="lg:col-span-2">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -154,7 +154,7 @@ export const GalleryDetail = () => {
       </div>
 
       {/* Related Projects Section */}
-      <div className="max-w-7xl mx-auto px-6 mt-24 pt-16 border-t border-surface-container-low">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 mt-24 pt-16 border-t border-surface-container-low">
         <h2 className="text-3xl font-display font-bold mb-8 text-on-surface">More From Our Gallery</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {relatedProjects.map((rel) => (

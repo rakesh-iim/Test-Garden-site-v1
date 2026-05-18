@@ -61,7 +61,7 @@ const projects = [
 
 export const LandscapesInAction = () => {
   return (
-    <section className="py-24 max-w-7xl mx-auto px-6">
+    <section className="py-24 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -62,7 +62,7 @@ const clients = [
 export const ClientMarquee = () => {
   return (
     <section className="pt-20 pb-16 bg-transparent overflow-hidden relative z-10">
-      <div className="max-w-7xl mx-auto px-6 mb-12">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 mb-12">
         <h3 className="text-center text-2xl md:text-3xl font-display font-medium text-on-surface-variant tracking-wide">
           Designed for workplaces of every scale
         </h3>

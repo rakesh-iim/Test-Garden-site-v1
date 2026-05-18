@@ -9,6 +9,7 @@ import { LandscapesInAction } from '../components/LandscapesInAction';
 import { TestimonialsSection } from '../components/TestimonialsSection';
 
 import { ClientMarquee } from '../components/ClientMarquee';
+import { StoreLocator } from '../components/StoreLocator';
 
 const Hero = () => {
   const ref = React.useRef(null);
@@ -30,7 +31,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-black/40" />
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +107,7 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-24 max-w-7xl mx-auto px-6">
+    <section className="py-24 w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -204,6 +205,7 @@ export const Home = () => {
       </div>
       
       <div id="contact" className="bg-surface relative z-10">
+        <StoreLocator />
         <LeadGen simplified={true} />
       </div>
     </>

@@ -46,7 +46,7 @@ export const Services = () => {
   ];
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-6">
+    <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
         <title>Our Landscaping Services | Urban Oasis</title>
         <meta name="description" content="Discover our specialized landscaping services including Terrace Transformation, Balcony Makeovers, Penthouse Transformations, and Office Landscaping." />

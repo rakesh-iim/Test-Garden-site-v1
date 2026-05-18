@@ -17,7 +17,7 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-14 sm:h-16 flex justify-between items-center">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 h-14 sm:h-16 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center">
             <img src="/logo.png" alt="MrGardenr Logo" className="h-12 sm:h-14 scale-[2.8] sm:scale-[3.2] origin-left object-contain w-auto mix-blend-multiply [clip-path:inset(0_0_25%_0)] translate-y-1 sm:translate-y-2 -translate-x-12 sm:-translate-x-14" />

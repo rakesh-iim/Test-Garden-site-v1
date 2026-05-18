@@ -29,7 +29,7 @@ const AnimatedCounter = ({ value, duration = 2, suffix = '' }: { value: number, 
 
 export const AboutUs = () => {
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-6">
+    <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
         <title>About Us</title>
         <meta name="description" content="Learn about Urban Oasis, our expert team passionate about crafting bespoke botanical environments. From luxury penthouse transformations to low-maintenance office green spaces." />

@@ -72,7 +72,7 @@ const projects = [
 
 export const Projects = () => {
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-6">
+    <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
         <title>Our Projects</title>
         <meta name="description" content="Explore our featured landscaping projects. See how Urban Oasis transforms urban spaces into lush green sanctuaries with tailored design and resilient planting." />

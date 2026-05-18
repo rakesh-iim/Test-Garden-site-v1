@@ -130,7 +130,7 @@ export const LeadGen = ({ simplified = false }) => {
 
   return (
     <section className="py-24 bg-secondary text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <div>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">Start Your Project Today</h2>
           <p className="text-xl text-white/80 mb-10 leading-relaxed max-w-lg font-medium">
