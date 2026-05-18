@@ -6,22 +6,22 @@ const locations = [
   {
     id: 'ahmedabad',
     city: 'Ahmedabad',
-    address: 'MrGardenr, SG Highway, Ahmedabad, Gujarat 380015',
+    address: 'MrGardenr, Iskcon Cross Rd, Sanidhya, Ahmedabad, Gujarat 380058',
     phone: '+91-9761655546',
     email: 'hello@mrgardenr.in',
     hours: 'Mon - Sat: 10:00 AM - 7:00 PM',
-    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.74862600498!2d72.43965!3d23.0225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000',
-    directionsLink: 'https://maps.google.com/?q=Ahmedabad+Gujarat'
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.909533143002!2d72.50156758543913!3d23.02709366246803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9b83de8291d1%3A0xec509cec14cfa578!2sMr%20Gardenr%20-%20Ahmedabad!5e0!3m2!1sen!2sin!4v1779099884600!5m2!1sen!2sin',
+    directionsLink: 'https://maps.app.goo.gl/eageJXthMfx4D9ZQ6'
   },
   {
     id: 'surat',
     city: 'Surat',
-    address: 'MrGardenr, Vesu, Surat, Gujarat 395007',
+    address: 'MrGardenr, GF 6, VR Mall, Luxuria business hub, road, opposite Imax cinema, New Magdalla, Surat, Rundh, Gujarat 395007',
     phone: '+91-9761655546',
     email: 'hello@mrgardenr.in',
     hours: 'Mon - Sat: 10:00 AM - 7:00 PM',
-    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d238570.26178714498!2d72.7519!3d21.1702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04e59411d1563%3A0xfe4558290938b042!2sSurat%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000001',
-    directionsLink: 'https://maps.google.com/?q=Surat+Gujarat'
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.1381590524315!2d72.75709447584363!3d21.146899383709286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04d7fec304a13%3A0x784ec8954a182ed9!2sMr%20Gardenr!5e0!3m2!1sen!2sin!4v1779098199760!5m2!1sen!2sin',
+    directionsLink: 'https://maps.app.goo.gl/mk7JizK3GrhjwU7y6'
   },
   {
     id: 'vadodara',
@@ -30,8 +30,8 @@ const locations = [
     phone: '+91-9761655546',
     email: 'hello@mrgardenr.in',
     hours: 'Mon - Sat: 10:00 AM - 7:00 PM',
-    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235014.29918117!2d73.1812!3d22.3072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0x1f9e4f1b7c9c26d1!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000002',
-    directionsLink: 'https://www.google.com/maps/search/Mr+Gardenr+Vadodara'
+    mapSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.2012610274564!2d73.16682537586647!3d22.308226942607032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc9007154ad47%3A0x8c5d2a8f2c0d88ef!2sMr%20Gardenr!5e0!3m2!1sen!2sin!4v1779100209095!5m2!1sen!2sin',
+    directionsLink: 'https://maps.app.goo.gl/5pF7Z2ScodBR66yC9'
   },
   {
     id: 'bangalore',
@@ -51,7 +51,7 @@ export const StoreLocator = () => {
   const activeLocation = locations.find(loc => loc.id === activeTab);
 
   return (
-    <section className="py-24 bg-surface" id="locations">
+    <section className="py-24 bg-surface-container-lowest" id="locations">
       <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -75,7 +75,7 @@ export const StoreLocator = () => {
               onClick={() => setActiveTab(loc.id)}
               className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold transition-all duration-300 border-2 ${
                 activeTab === loc.id
-                  ? 'bg-primary border-primary text-white shadow-[0_4px_20px_rgba(0,104,62,0.35)]'
+                  ? 'bg-primary border-primary text-white shadow-[0_4px_20px_rgba(91,165,133,0.35)]'
                   : 'bg-white border-surface-container-highest text-on-surface hover:border-primary hover:text-primary hover:bg-primary/5'
               }`}
             >
