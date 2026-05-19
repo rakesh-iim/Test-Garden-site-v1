@@ -40,7 +40,7 @@ const ScrollToTop = () => {
 export default function App() {
   return (
     <HelmetProvider>
-      <Helmet titleTemplate="%s | Urban Oasis" defaultTitle="Urban Oasis | Premier Landscaping Design">
+      <Helmet titleTemplate="%s | MrGardenr " defaultTitle="MrGardenr">
         <meta name="description" content="Transform your outdoor spaces into lush sanctuaries. Urban Oasis specializes in Terrace Transformation, Balcony Makeovers, Penthouse Transformations, and Office Landscaping." />
         <meta name="keywords" content="landscape design, urban oasis, terrace landscaping, balcony makeover, penthouse garden, office landscaping" />
       </Helmet>
