@@ -79,7 +79,7 @@ export const ServiceDetail = () => {
   return (
     <div className="pt-32 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
-        <title>{service.title} | Urban Oasis</title>
+        <title>{service.title} | MrGardenr</title>
         <meta name="description" content={service.seoDesc || service.desc} />
         {service.keywords && <meta name="keywords" content={service.keywords as string} />}
       </Helmet>

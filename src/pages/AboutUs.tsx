@@ -32,8 +32,8 @@ export const AboutUs = () => {
     <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
         <title>About Us</title>
-        <meta name="description" content="Learn about Urban Oasis, our expert team passionate about crafting bespoke botanical environments. From luxury penthouse transformations to low-maintenance office green spaces." />
-        <meta name="keywords" content="about urban oasis, landscaping experts, botanical environments, garden designers, professional landscapers" />
+        <meta name="description" content="Learn about MrGardenr, our expert team passionate about crafting bespoke botanical environments. From luxury penthouse transformations to low-maintenance office green spaces." />
+        <meta name="keywords" content="about mrgardenr, landscaping experts, botanical environments, garden designers, professional landscapers" />
       </Helmet>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

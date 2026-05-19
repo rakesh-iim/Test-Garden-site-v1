@@ -48,7 +48,7 @@ export const Services = () => {
   return (
     <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
-        <title>Our Landscaping Services | Urban Oasis</title>
+        <title>Our Landscaping Services | MrGardenr</title>
         <meta name="description" content="Discover our specialized landscaping services including Terrace Transformation, Balcony Makeovers, Penthouse Transformations, and Office Landscaping." />
         <meta name="keywords" content="landscape design, terrace transformation, balcony makeover, penthouse transformation, office landscaping, urban garden, custom planters, vertical gardens" />
       </Helmet>

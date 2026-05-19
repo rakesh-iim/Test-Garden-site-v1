@@ -33,8 +33,8 @@ export const GalleryDetail = () => {
     <div className="pt-20 pb-24">
       <Helmet>
         <title>{project.title} | Project Details</title>
-        <meta name="description" content={`View details for ${project.title}, a landscaping project by Urban Oasis in ${project.location}.`} />
-        <meta name="keywords" content={`landscaping project, ${project.category.toLowerCase()}, urban oasis, ${project.location}`} />
+        <meta name="description" content={`View details for ${project.title}, a landscaping project by MrGardenr in ${project.location}.`} />
+        <meta name="keywords" content={`landscaping project, ${project.category.toLowerCase()}, mrgardenr, ${project.location}`} />
       </Helmet>
       {/* Hero Section */}
       <div className="relative h-[60vh] min-h-[400px] w-full bg-surface-container-low mb-16">

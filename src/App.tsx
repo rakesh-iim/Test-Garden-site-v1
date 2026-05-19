@@ -40,9 +40,9 @@ const ScrollToTop = () => {
 export default function App() {
   return (
     <HelmetProvider>
-      <Helmet titleTemplate="%s | MrGardenr " defaultTitle="MrGardenr">
-        <meta name="description" content="Transform your outdoor spaces into lush sanctuaries. Urban Oasis specializes in Terrace Transformation, Balcony Makeovers, Penthouse Transformations, and Office Landscaping." />
-        <meta name="keywords" content="landscape design, urban oasis, terrace landscaping, balcony makeover, penthouse garden, office landscaping" />
+      <Helmet titleTemplate="%s | MrGardenr" defaultTitle="MrGardenr">
+        <meta name="description" content="Transform your outdoor spaces into lush sanctuaries. MrGardenr specializes in Terrace Transformation, Balcony Makeovers, Penthouse Transformations, and Office Landscaping." />
+        <meta name="keywords" content="landscape design, mrgardenr, terrace landscaping, balcony makeover, penthouse garden, office landscaping" />
       </Helmet>
       <BrowserRouter>
         <div className="selection:bg-primary-container selection:text-white">

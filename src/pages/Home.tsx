@@ -179,8 +179,8 @@ export const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Urban Oasis | Expert Landscape Design & Transformation</title>
-        <meta name="description" content="Urban Oasis provides professional landscaping services. Specializing in high-end terrace transformations, balcony makeovers, and commercial office landscaping." />
+        <title>MrGardenr | Expert Landscape Design & Transformation</title>
+        <meta name="description" content="MrGardenr provides professional landscaping services. Specializing in high-end terrace transformations, balcony makeovers, and commercial office landscaping." />
         <meta name="keywords" content="expert landscape design, urban landscaping, terrace transformations, bespoke outdoor spaces, landscaping services" />
       </Helmet>
       

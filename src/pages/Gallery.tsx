@@ -72,8 +72,8 @@ export const Gallery = () => {
     <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 relative">
       <Helmet>
         <title>Project Gallery</title>
-        <meta name="description" content="Browse the Urban Oasis portfolio. View stunning before and afters of our Terrace Transformations, Balcony Makeovers, Penthouse Gardens, and Office Landscaping." />
-        <meta name="keywords" content="landscaping gallery, urban oasis portfolio, garden design photos, terrace transformation examples, balcony makeover pictures, penthouse garden design" />
+        <meta name="description" content="Browse the MrGardenr portfolio. View stunning before and afters of our Terrace Transformations, Balcony Makeovers, Penthouse Gardens, and Office Landscaping." />
+        <meta name="keywords" content="landscaping gallery, mrgardenr portfolio, garden design photos, terrace transformation examples, balcony makeover pictures, penthouse garden design" />
       </Helmet>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

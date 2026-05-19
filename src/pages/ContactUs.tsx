@@ -9,8 +9,8 @@ export const ContactUs = () => {
     <div className="pt-20">
       <Helmet>
         <title>Contact Us</title>
-        <meta name="description" content="Get in touch with Urban Oasis to discuss your next landscaping project. Request a quote for your Terrace, Balcony, Penthouse, or Office green space today." />
-        <meta name="keywords" content="contact urban oasis, landscaping quote, request garden design, hire a landscaper" />
+        <meta name="description" content="Get in touch with MrGardenr to discuss your next landscaping project. Request a quote for your Terrace, Balcony, Penthouse, or Office green space today." />
+        <meta name="keywords" content="contact mrgardenr, landscaping quote, request garden design, hire a landscaper" />
       </Helmet>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

@@ -75,7 +75,7 @@ export const Projects = () => {
     <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <Helmet>
         <title>Our Projects</title>
-        <meta name="description" content="Explore our featured landscaping projects. See how Urban Oasis transforms urban spaces into lush green sanctuaries with tailored design and resilient planting." />
+        <meta name="description" content="Explore our featured landscaping projects. See how MrGardenr transforms urban spaces into lush green sanctuaries with tailored design and resilient planting." />
         <meta name="keywords" content="landscaping projects, case studies, urban garden design projects, tailored landscaping" />
       </Helmet>
       <div className="mb-12">
