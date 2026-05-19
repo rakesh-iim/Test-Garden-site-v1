@@ -100,9 +100,9 @@ const Expertise = () => {
       id: "office-landscaping",
       desc: "Develop vibrant, low-maintenance green spaces for educational or corporate campuses, establishing outdoor areas that inspire collaboration and provide a natural haven.",
       icon: Leaf,
-      color: "bg-tertiary-container/10",
-      textColor: "text-tertiary-container",
-      border: "border-t-4 border-tertiary-container"
+      color: "bg-primary/10",
+      textColor: "text-primary",
+      border: "border-t-4 border-primary"
     }
   ];
 

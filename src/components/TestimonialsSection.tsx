@@ -38,7 +38,7 @@ export const TestimonialsSection = () => {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-tertiary-container text-white p-10 md:p-14 rounded-3xl shadow-xl relative overflow-hidden"
+          className="bg-secondary text-white p-10 md:p-14 rounded-3xl shadow-xl relative overflow-hidden"
         >
           <div className="absolute -right-8 -bottom-8 opacity-10 rotate-12">
             <Trees size={240} strokeWidth={1} />

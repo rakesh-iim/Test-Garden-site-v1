@@ -17,6 +17,7 @@ import { Gallery } from './pages/Gallery';
 import { GalleryDetail } from './pages/GalleryDetail';
 import { ContactUs } from './pages/ContactUs';
 import { Projects } from './pages/Projects';
+import { ProjectDetail } from './pages/ProjectDetail';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/gallery/:itemId" element={<GalleryDetail />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:projectId" element={<ProjectDetail />} />
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />

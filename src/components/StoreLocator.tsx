@@ -135,7 +135,7 @@ export const StoreLocator = () => {
                     <p className="text-xl text-on-surface-variant max-w-lg mx-auto mb-8">
                       We're bringing our premier landscaping services to {activeLocation.city} soon. Stay tuned!
                     </p>
-                    <span className="inline-flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-full">
+                    <span className="inline-flex items-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-full animate-pulse">
                       Coming Soon
                     </span>
                   </div>

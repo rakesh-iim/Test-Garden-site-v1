@@ -2,31 +2,31 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
-import { PORTFOLIO_ITEMS } from '../constants';
-import { ArrowLeft, ExternalLink, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { LATEST_PROJECTS } from '../constants';
+import { ArrowLeft, ExternalLink, Calendar, MapPin } from 'lucide-react';
 
-export const GalleryDetail = () => {
-  const { itemId } = useParams<{ itemId: string }>();
-  const project = PORTFOLIO_ITEMS.find((item) => item.id === itemId);
+export const ProjectDetail = () => {
+  const { projectId } = useParams<{ projectId: string }>();
+  const project = LATEST_PROJECTS.find((item) => item.id === projectId);
 
   if (!project) {
     return (
       <div className="pt-32 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 text-center">
         <h1 className="text-4xl font-display font-bold mb-4">Project Not Found</h1>
         <p className="text-on-surface-variant mb-8">The project you are looking for does not exist or has been removed.</p>
-        <Link to="/gallery" className="inline-flex items-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full hover-lift shadow-lg">
+        <Link to="/projects" className="inline-flex items-center gap-2 bg-primary-container text-on-primary font-bold px-6 py-3 rounded-full hover-lift shadow-lg">
           <ArrowLeft size={20} />
-          Back to Gallery
+          Back to Projects
         </Link>
       </div>
     );
   }
 
-  // Find related projects (e.g., matching category or services, but for simplicity just pick next 2)
-  const currentIndex = PORTFOLIO_ITEMS.findIndex((item) => item.id === itemId);
+  // Find related projects
+  const currentIndex = LATEST_PROJECTS.findIndex((item) => item.id === projectId);
   const relatedProjects = [
-    PORTFOLIO_ITEMS[(currentIndex + 1) % PORTFOLIO_ITEMS.length],
-    PORTFOLIO_ITEMS[(currentIndex + 2) % PORTFOLIO_ITEMS.length]
+    LATEST_PROJECTS[(currentIndex + 1) % LATEST_PROJECTS.length],
+    LATEST_PROJECTS[(currentIndex + 2) % LATEST_PROJECTS.length]
   ];
 
   return (
@@ -46,12 +46,12 @@ export const GalleryDetail = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
           <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24 pb-12 w-full">
-            <Link to="/gallery" className="inline-flex items-center gap-2 text-white/80 hover:text-primary font-medium mb-6 transition-all group overflow-hidden relative">
+            <Link to="/projects" className="inline-flex items-center gap-2 text-white/80 hover:text-primary font-medium mb-6 transition-all group overflow-hidden relative">
               <span className="flex items-center gap-2 group-hover:-translate-y-full transition-transform duration-300">
-                <ArrowLeft size={18} /> Back to Gallery
+                <ArrowLeft size={18} /> Back to Projects
               </span>
               <span className="absolute inset-0 flex items-center gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 text-primary">
-                <ArrowLeft size={18} /> Back to Gallery
+                <ArrowLeft size={18} /> Back to Projects
               </span>
             </Link>
             <motion.h1 
@@ -159,10 +159,10 @@ export const GalleryDetail = () => {
 
       {/* Related Projects Section */}
       <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 mt-24 pt-16 border-t border-surface-container-low">
-        <h2 className="text-3xl font-display font-bold mb-8 text-on-surface">More From Our Gallery</h2>
+        <h2 className="text-3xl font-display font-bold mb-8 text-on-surface">More From Our Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {relatedProjects.map((rel) => (
-            <Link key={rel.id} to={`/gallery/${rel.id}`} className="group block">
+            <Link key={rel.id} to={`/projects/${rel.id}`} className="group block">
               <div className="relative overflow-hidden rounded-2xl aspect-video mb-4 bg-surface-container-low">
                 <img 
                   src={rel.img} 
