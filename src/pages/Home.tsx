@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, Chrome as ChevronRight, Trees, ChevronLeft } from 'lucide-react';
+import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, ChevronRight, Trees, ChevronLeft, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
 import { LandscapesInAction } from '../components/LandscapesInAction';
@@ -165,7 +165,7 @@ const Expertise = () => {
                 </p>
               </div>
               <Link to={`/services/${s.id}`} className={`flex items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-primary-container group-hover:text-primary'} hover:underline group-hover:gap-2 transition-all`}>
-                Learn more <ChevronRight className="w-4 h-4" />
+                Learn more <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </motion.div>
@@ -256,24 +256,70 @@ export const Home = () => {
       
       <div id="contact" className="relative z-10 bg-white">
         <StoreLocator />
-        <div className="bg-secondary text-white py-24 border-y border-black/5">
-          <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Expert Consultation</h2>
-                <p className="text-lg text-white/80 mb-8 leading-relaxed">
-                  Ready to bring breathing room and lush vitality to your landscape? Book an expert consultation and let our design team cultivate your vision.
-                </p>
-                <ul className="space-y-4 mb-8">
-                  {['Customized Design Plans', 'Professional Execution', 'Ongoing Maintenance Options'].map(item => (
-                    <li key={item} className="flex items-center gap-3 text-white font-semibold">
-                      <div className="bg-white/20 p-1.5 rounded-full"><Leaf className="w-5 h-5 text-white" /></div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <ServiceBooking />
+        <div className="bg-[#0b1612] text-white py-12 lg:py-24 relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-[#13261f] hidden lg:block rounded-l-[4rem]"></div>
+          <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+              
+              {/* Left side content & Image */}
+              <motion.div 
+                 initial={{ opacity: 0, x: -30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 0.6, ease: "easeOut" }}
+                 className="space-y-10"
+              >
+                <div>
+                   <span className="inline-flex items-center gap-2 bg-white/10 text-white font-bold px-4 py-2 rounded-full mb-8 tracking-wide uppercase text-sm shadow-sm backdrop-blur-sm">
+                     <Leaf className="w-4 h-4" />
+                     Book a Consultation
+                   </span>
+                   <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-display font-bold mb-6 text-white leading-[1.1] tracking-tight">
+                     Cultivate your <br className="hidden md:block" /> <span className="text-primary-container italic">perfect</span> space.
+                   </h2>
+                   <p className="text-lg md:text-xl text-white/80 max-w-xl leading-relaxed">
+                     Ready to bring breathing room and lush vitality to your landscape? Schedule an expert consultation and let our design team cultivate your vision into reality.
+                   </p>
+                   
+                   <div className="mt-8 space-y-4 max-w-md">
+                      {['Personalized styling advice', 'Precise site measurements', 'Tailored plant selection'].map((feature, i) => (
+                        <div key={i} className="flex items-center gap-4 text-white font-medium">
+                          <div className="bg-white/20 p-1.5 rounded-full shrink-0">
+                            <CheckCircle2 className="w-5 h-5 text-white" />
+                          </div>
+                          {feature}
+                        </div>
+                      ))}
+                   </div>
+                </div>
+
+                <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] max-w-lg hidden md:block group">
+                   <img src={IMAGES.project1} alt="Landscaping transformation" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                   <div className="absolute bottom-8 left-8 right-8">
+                      <p className="text-white font-medium text-lg lg:text-xl leading-snug">"The team completely transformed our space into a lush oasis. Best decision we've made."</p>
+                      <p className="text-white/70 mt-3 font-semibold tracking-wide uppercase text-sm">— Sarah Jenkins</p>
+                   </div>
+                </div>
+              </motion.div>
+
+              {/* Right side form */}
+              <motion.div 
+                 initial={{ opacity: 0, x: 30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                 className="relative"
+              >
+                 {/* Decorative blob behind the form */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-primary-container/20 blur-[80px] rounded-full -z-10"></div>
+                 
+                 <ServiceBooking className="w-full lg:max-w-xl shadow-[0_8px_40px_rgba(0,0,0,0.2)] border-white/10 backdrop-blur-xl bg-surface/95 mx-0 lg:ml-auto" />
+              </motion.div>
+
             </div>
           </div>
         </div>
