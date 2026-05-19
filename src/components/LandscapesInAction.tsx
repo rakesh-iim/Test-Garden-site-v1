@@ -75,7 +75,7 @@ export const LandscapesInAction = () => {
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-        {projects.slice(0, 6).map((project, index) => (
+        {projects.slice(0, 7).map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
@@ -93,7 +93,7 @@ export const LandscapesInAction = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-80" />
             <div className="absolute bottom-6 left-6">
-              <h3 className="text-white font-display font-bold text-xl md:text-2xl tracking-wider">
+              <h3 className="text-white font-montserrat font-bold text-xl md:text-2xl tracking-wider">
                 {project.title}
               </h3>
             </div>

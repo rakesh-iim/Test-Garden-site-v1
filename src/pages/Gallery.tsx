@@ -39,6 +39,50 @@ const getHighResUrl = (url: string) => {
   }
 };
 
+const ImageWithBlurUp = ({ src, alt, className }: { src: string, alt: string, className?: string }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const getTinyUrl = (url: string) => {
+    if (!url.includes('unsplash.com')) return url;
+    try {
+      const baseUrl = url.split('?')[0];
+      const params = new URLSearchParams(url.split('?')[1] || '');
+      params.set('auto', 'format');
+      params.set('fit', 'crop');
+      params.set('q', '20');
+      params.set('w', '40');
+      return `${baseUrl}?${params.toString()}`;
+    } catch {
+      return url;
+    }
+  };
+
+  return (
+    <>
+      <img
+        src={getTinyUrl(src)}
+        alt=""
+        aria-hidden="true"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 blur-xl scale-110 ${
+          isLoaded ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+      <img
+        src={src}
+        srcSet={getOptimizedSrcSet(src)}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setIsLoaded(true)}
+        className={`relative z-10 w-full h-full object-cover transition-all duration-700 ${className || ''} ${
+          isLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-md scale-105'
+        }`}
+      />
+    </>
+  );
+};
+
 export const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isFiltering, setIsFiltering] = useState(false);
@@ -150,14 +194,10 @@ export const Gallery = () => {
                     {/* Placeholder while image lazy loads initially */}
                     <div className="absolute inset-0 bg-surface-container/50 animate-pulse" />
                     
-                    <img 
+                    <ImageWithBlurUp 
                       src={it.img} 
-                      srcSet={getOptimizedSrcSet(it.img)}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       alt={it.title} 
-                      loading="lazy"
-                      decoding="async"
-                      className="relative z-10 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      className="group-hover:scale-110" 
                     />
                     
                     <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">

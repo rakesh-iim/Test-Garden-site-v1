@@ -17,12 +17,27 @@ export const Footer = () => (
         </p>
       </div>
 
-      <div className="flex md:hidden items-center justify-center gap-4 md:gap-8 hide-scrollbar overflow-x-auto w-full md:w-auto">
-        <Link to="/services" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Services</Link>
-        <Link to="/about" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">About Us</Link>
-        <Link to="/gallery" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Gallery Showcase</Link>
-        <Link to="/privacy" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Privacy Policy</Link>
-        <Link to="/terms" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium whitespace-nowrap">Terms of Service</Link>
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 w-full md:w-auto">
+        <Link to="/services" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium relative group overflow-hidden">
+          <span className="block group-hover:-translate-y-full transition-transform duration-300">Services</span>
+          <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 text-primary">Services</span>
+        </Link>
+        <Link to="/about" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium relative group overflow-hidden">
+          <span className="block group-hover:-translate-y-full transition-transform duration-300">About Us</span>
+          <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 text-primary">About Us</span>
+        </Link>
+        <Link to="/gallery" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium relative group overflow-hidden">
+          <span className="block group-hover:-translate-y-full transition-transform duration-300">Gallery Showcase</span>
+          <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 text-primary">Gallery Showcase</span>
+        </Link>
+        <Link to="/privacy" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium relative group overflow-hidden">
+          <span className="block group-hover:-translate-y-full transition-transform duration-300">Privacy Policy</span>
+          <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 text-primary">Privacy Policy</span>
+        </Link>
+        <Link to="/terms" className="text-sm text-on-surface-variant hover:text-primary transition-colors font-medium relative group overflow-hidden">
+          <span className="block group-hover:-translate-y-full transition-transform duration-300">Terms of Service</span>
+          <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 text-primary">Terms of Service</span>
+        </Link>
       </div>
 
       <div className="flex items-center justify-center gap-4">
