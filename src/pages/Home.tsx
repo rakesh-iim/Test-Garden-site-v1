@@ -185,7 +185,7 @@ export const Home = () => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = 'unset';
-    }, 2000);
+    }, 800);
     return () => {
       clearTimeout(timer);
       document.body.style.overflow = 'unset';
@@ -199,7 +199,7 @@ export const Home = () => {
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-surface flex flex-col items-center justify-center"
           >
             <motion.div
@@ -220,7 +220,7 @@ export const Home = () => {
                   className="h-full bg-primary"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
                 />
               </motion.div>
             </motion.div>
