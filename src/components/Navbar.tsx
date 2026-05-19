@@ -13,6 +13,7 @@ export const Navbar = () => {
     { name: 'Services', path: '/services' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Store Locator', path: '/#locations' },
   ];
 
   return (

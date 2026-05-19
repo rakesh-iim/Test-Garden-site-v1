@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, Chrome as ChevronRight, Trees, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
@@ -176,8 +176,58 @@ const Expertise = () => {
 };
 
 export const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+    // Simulate loading time for the splash screen
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      document.body.style.overflow = 'unset';
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
     <>
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] bg-surface flex flex-col items-center justify-center"
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="flex flex-col items-center justify-center"
+            >
+              <img 
+                src="/logo.png" 
+                alt="MrGardenr Logo" 
+                className="w-48 sm:w-64 h-auto object-contain mix-blend-multiply [clip-path:inset(0_0_20%_0)]" 
+              />
+              <motion.div 
+                className="w-48 h-1 bg-surface-container-highest rounded-full overflow-hidden mt-8"
+              >
+                <motion.div 
+                  className="h-full bg-primary"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Helmet>
         <title>MrGardenr | Expert Landscape Design & Transformation</title>
         <meta name="description" content="MrGardenr provides professional landscaping services. Specializing in high-end terrace transformations, balcony makeovers, and commercial office landscaping." />
