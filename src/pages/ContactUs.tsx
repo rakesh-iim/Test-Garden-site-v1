@@ -2,7 +2,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { LeadGen } from '../components/LeadGen';
-import { StoreLocator } from '../components/StoreLocator';
 
 export const ContactUs = () => {
   return (
@@ -22,7 +21,6 @@ export const ContactUs = () => {
         </span>
         <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">Let's Cultivate Something Beautiful</h1>
       </motion.div>
-      <StoreLocator />
       <LeadGen simplified={false} />
     </div>
   );

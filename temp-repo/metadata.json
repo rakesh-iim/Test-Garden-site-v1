@@ -1,0 +1,6 @@
+{
+  "name": "Service Booking Component",
+  "description": "A reusable and embeddable service booking feature with city selection, time slots, and user details.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

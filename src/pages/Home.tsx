@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, Chrome as ChevronRight, Trees, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
-import { LeadGen } from '../components/LeadGen';
 import { LandscapesInAction } from '../components/LandscapesInAction';
 import { TestimonialsSection } from '../components/TestimonialsSection';
+import ServiceBooking from '../components/ServiceBooking';
 
 import { ClientMarquee } from '../components/ClientMarquee';
 import { StoreLocator } from '../components/StoreLocator';
@@ -176,25 +176,25 @@ const Expertise = () => {
 };
 
 export const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Disable scrolling
-    document.body.style.overflow = 'hidden';
+    // document.body.style.overflow = 'hidden';
     // Simulate loading time for the splash screen
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      document.body.style.overflow = 'unset';
-    }, 800);
-    return () => {
-      clearTimeout(timer);
-      document.body.style.overflow = 'unset';
-    };
+    // const timer = setTimeout(() => {
+    //   setIsLoading(false);
+    //   document.body.style.overflow = 'unset';
+    // }, 800);
+    // return () => {
+    //   clearTimeout(timer);
+    //   document.body.style.overflow = 'unset';
+    // };
   }, []);
 
   return (
     <>
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isLoading && (
           <motion.div
             initial={{ opacity: 1 }}
@@ -226,10 +226,10 @@ export const Home = () => {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       <Helmet>
-        <title>MrGardenr | Expert Landscape Design & Transformation</title>
+        <title>MrGardenr</title>
         <meta name="description" content="MrGardenr provides professional landscaping services. Specializing in high-end terrace transformations, balcony makeovers, and commercial office landscaping." />
         <meta name="keywords" content="expert landscape design, urban landscaping, terrace transformations, bespoke outdoor spaces, landscaping services" />
       </Helmet>
@@ -250,13 +250,33 @@ export const Home = () => {
         <TestimonialsSection />
       </div>
       
-      <div className="bg-surface-container-low border-y border-black/5 dark:border-white/5 relative z-10">
+      <div className="bg-surface-container-low border-t border-black/5 dark:border-white/5 relative z-10">
         <ClientMarquee />
       </div>
       
-      <div id="contact" className="bg-surface relative z-10">
+      <div id="contact" className="relative z-10 bg-white">
         <StoreLocator />
-        <LeadGen simplified={true} />
+        <div className="bg-secondary text-white py-24 border-y border-black/5">
+          <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Expert Consultation</h2>
+                <p className="text-lg text-white/80 mb-8 leading-relaxed">
+                  Ready to bring breathing room and lush vitality to your landscape? Book an expert consultation and let our design team cultivate your vision.
+                </p>
+                <ul className="space-y-4 mb-8">
+                  {['Customized Design Plans', 'Professional Execution', 'Ongoing Maintenance Options'].map(item => (
+                    <li key={item} className="flex items-center gap-3 text-white font-semibold">
+                      <div className="bg-white/20 p-1.5 rounded-full"><Leaf className="w-5 h-5 text-white" /></div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <ServiceBooking />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
