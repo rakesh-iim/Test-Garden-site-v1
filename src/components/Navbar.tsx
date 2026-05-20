@@ -33,9 +33,10 @@ export const Navbar = () => {
               <Link 
                 key={item.name} 
                 to={item.path}
-                className={`text-sm font-semibold inline-block origin-center transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 hover:text-primary hover:drop-shadow-sm ${isActive ? 'text-primary' : 'text-on-surface-variant'}`}
+                className={`relative group text-sm font-semibold inline-block origin-center transition-all duration-300 hover:scale-[1.05] hover:-translate-y-0.5 hover:text-primary hover:drop-shadow-sm ${isActive ? 'text-primary' : 'text-on-surface-variant'}`}
               >
                 {item.name}
+                <span className={`absolute -bottom-1 left-0 w-full h-[2px] bg-primary origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100`}></span>
               </Link>
             );
           })}

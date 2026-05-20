@@ -181,14 +181,18 @@ const Expertise = () => {
                   <s.icon className={`w-6 h-6 transform transition-transform duration-300 group-hover:scale-110 ${s.theme === 'magnetic' ? 'group-hover:text-primary-container transition-colors duration-[0.5s]' : ''}`} />
                 </div>
                 <Link to={`/services/${s.id}`}>
-                  <h3 className={`text-2xl font-display font-bold mb-3 hover:underline ${s.theme === 'dark' ? 'text-white' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-on-surface group-hover:text-primary transition-colors'}`}>{s.title}</h3>
+                  <h3 className={`relative group/title inline-block text-2xl font-display font-bold mb-3 ${s.theme === 'dark' ? 'text-white' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-on-surface group-hover:text-primary transition-colors'}`}>
+                    {s.title}
+                    <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${s.theme === 'dark' ? 'bg-white' : s.theme === 'magnetic' ? 'bg-primary-container' : 'bg-primary'} origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/title:scale-x-100`}></span>
+                  </h3>
                 </Link>
                 <p className={`${s.theme === 'dark' ? 'text-white/80 group-hover:text-white transition-colors' : s.theme === 'magnetic' ? 'text-on-primary/90 group-hover:text-primary-container/90 transition-colors duration-[0.5s]' : 'text-on-surface-variant group-hover:text-on-surface transition-colors'} mb-6 leading-relaxed`}>
                   {s.desc}
                 </p>
               </div>
-              <Link to={`/services/${s.id}`} className={`flex items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-primary-container group-hover:text-primary'} hover:underline group-hover:gap-2 transition-all`}>
+              <Link to={`/services/${s.id}`} className={`relative group/learn inline-flex w-fit items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-primary-container group-hover:text-primary'} group-hover:gap-2 transition-all`}>
                 Learn more <ArrowRight className="w-4 h-4" />
+                <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${s.theme === 'dark' ? 'bg-white' : s.theme === 'magnetic' ? 'bg-primary-container' : 'bg-primary'} origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/learn:scale-x-100`}></span>
               </Link>
             </div>
           </motion.div>

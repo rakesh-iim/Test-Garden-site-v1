@@ -88,8 +88,9 @@ export const Services = () => {
             )}
             <div className="p-6 md:p-8">
               <h3 className={`text-2xl font-display font-bold mb-3 text-on-surface`}>
-                <Link to={`/services/${s.id}`} className="hover:text-primary transition-colors">
+                <Link to={`/services/${s.id}`} className="relative group/title inline-block hover:text-primary transition-colors">
                   {s.title}
+                  <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/title:scale-x-100"></span>
                 </Link>
               </h3>
               <p className={`text-base leading-relaxed mb-6 text-on-surface-variant`}>{s.desc}</p>

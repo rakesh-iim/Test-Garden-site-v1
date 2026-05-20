@@ -144,10 +144,10 @@ export const Gallery = () => {
           <button
             key={category}
             onClick={() => handleCategoryChange(category)}
-            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 active:scale-95 ${
               activeCategory === category 
                 ? 'bg-primary text-on-primary shadow-md transform scale-105' 
-                : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface border border-transparent'
+                : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface border border-transparent hover:scale-105 hover:-translate-y-0.5 hover:shadow-sm'
             }`}
           >
             {category}
@@ -219,10 +219,7 @@ export const Gallery = () => {
                           <Linkedin size={16} />
                         </button>
                       </div>
-                      <h3 className="text-white text-2xl font-display font-bold opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">{it.title}</h3>
-                      <p className="text-white/80 font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 mb-3">{it.category}</p>
-                      
-                      <div className="flex items-center gap-4 text-white/90 text-sm font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                      <div className="flex items-center gap-4 text-white/90 text-sm font-medium opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
                         {it.location && (
                           <span className="flex items-center gap-1.5">
                             <MapPin size={14} className="text-primary-fixed" />
