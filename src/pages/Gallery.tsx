@@ -98,7 +98,7 @@ export const Gallery = () => {
     // Simulate processing time for smoother perceived performance
     setTimeout(() => {
       setIsFiltering(false);
-    }, 600);
+    }, 100);
   };
 
   const openModal = (e: React.MouseEvent, imgSrc: string) => {
@@ -175,7 +175,7 @@ export const Gallery = () => {
             initial="hidden"
             animate="visible"
             variants={{
-              visible: { transition: { staggerChildren: 0.1 } },
+              visible: { transition: { staggerChildren: 0.05 } },
               hidden: {}
             }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -185,7 +185,7 @@ export const Gallery = () => {
                 key={it.id || i}
                 variants={{
                   hidden: { opacity: 0, y: 20, scale: 0.95 },
-                  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
+                  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
                 className="group w-full"
               >
@@ -197,7 +197,7 @@ export const Gallery = () => {
                     <ImageWithBlurUp 
                       src={it.img} 
                       alt={it.title} 
-                      className="group-hover:scale-110" 
+                      className="group-hover:scale-105" 
                     />
                     
                     <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">

@@ -108,11 +108,11 @@ export const GalleryDetail = () => {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
               </div>
               <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800" alt={`${project.title} detail view`} className="w-full h-[300px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img loading="lazy" src="/images/project-2.webp" alt={`${project.title} detail view`} className="w-full h-[300px] object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
               </div>
               <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1558904541-efa843a96f0f?auto=format&fit=crop&q=80&w=800" alt={`${project.title} alternate angle`} className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img loading="lazy" src="/images/project-3.webp" alt={`${project.title} alternate angle`} className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
               </div>
               <div className="rounded-2xl overflow-hidden bg-surface-container-low break-inside-avoid relative group">

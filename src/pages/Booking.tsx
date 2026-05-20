@@ -17,7 +17,7 @@ export const Booking = () => {
       <div className="min-h-[calc(100vh-80px)] py-12 lg:py-24 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 hidden lg:block rounded-l-[4rem]"></div>
-        <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[60px] pointer-events-none"></div>
 
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -71,7 +71,7 @@ export const Booking = () => {
                className="relative"
             >
                {/* Decorative blob behind the form */}
-               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/10 to-secondary/10 blur-[80px] rounded-full -z-10"></div>
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/10 to-secondary/10 blur-[50px] rounded-full -z-10"></div>
                
                <ServiceBooking className="w-full lg:max-w-xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] border-white/50 backdrop-blur-xl bg-surface/90 mx-auto lg:mx-0" />
             </motion.div>

@@ -14,7 +14,7 @@ export const Services = () => {
       icon: Palette,
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
-      image: "https://images.unsplash.com/photo-1600607688066-890987f18a86?auto=format&fit=crop&q=80"
+      image: "/images/service-terrace.webp"
     },
     {
       id: "balcony-makeover",
@@ -23,7 +23,7 @@ export const Services = () => {
       icon: Sprout,
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
-      image: "https://images.unsplash.com/photo-1746553618662-2965b5a4ef8d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      image: "/images/service-balcony.webp"
     },
     {
       id: "penthouse-transformation",
@@ -32,7 +32,7 @@ export const Services = () => {
       icon: Grid2X2,
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
-      image: "https://images.unsplash.com/photo-1643271529376-fb122b7e36a0?q=80&w=1315&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      image: "/images/service-penthouse.webp"
     },
     {
       id: "office-landscaping",
@@ -41,7 +41,7 @@ export const Services = () => {
       icon: Leaf,
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+      image: "/images/service-office.webp"
     }
   ];
 
@@ -78,7 +78,7 @@ export const Services = () => {
           >
             {s.image && (
               <Link to={`/services/${s.id}`} className="block h-64 w-full relative overflow-hidden">
-                <img src={s.image} alt={s.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src={s.image} alt={s.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <span className="text-white font-bold tracking-wider uppercase text-sm border-2 border-white px-6 py-2 rounded-full backdrop-blur-md hover:bg-white hover:text-primary transition-colors">
                     View Details

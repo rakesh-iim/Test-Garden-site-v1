@@ -7,10 +7,9 @@ export const BackToTop = () => {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
+    const shouldBeVisible = latest > 300;
+    if (shouldBeVisible !== isVisible) {
+      setIsVisible(shouldBeVisible);
     }
   });
 

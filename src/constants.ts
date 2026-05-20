@@ -1,11 +1,11 @@
 export const IMAGES = {
-  hero: "https://images.unsplash.com/uploads/1411901100260f56b39b9/ab70b250?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  blueprints: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
-  project1: "https://images.unsplash.com/photo-1577566997011-307e150970dc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  project2: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1200&auto=format&fit=crop",
-  project3: "https://images.unsplash.com/photo-1546580594-a64816022c1b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  landscaper: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?q=80&w=1200&auto=format&fit=crop",
-  foliage: "https://images.unsplash.com/photo-1444392061186-9fc38f84f726?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  hero: "/images/hero-main.webp",
+  blueprints: "/images/blueprints.webp",
+  project1: "/images/project-1.webp",
+  project2: "/images/project-2.webp",
+  project3: "/images/project-3.webp",
+  landscaper: "/images/landscaper.webp",
+  foliage: "/images/foliage.webp"
 };
 
 export const TESTIMONIALS = [
@@ -13,19 +13,19 @@ export const TESTIMONIALS = [
     quote: "VerdantCraft completely revitalized our property. The balance of vibrant greenery and pristine stonework feels like a private luxury resort. Truly professional.",
     name: "Sarah Jenkins",
     location: "The Oaks",
-    avatar: "https://i.pravatar.cc/150?img=44"
+    avatar: "/images/avatar-1.webp"
   },
   {
     quote: "Their attention to detail is unmatched. Our lawn has never looked healthier, and the seasonal cleanups make a world of difference. Incredible team.",
     name: "Michael Chen",
     location: "Pine Valley",
-    avatar: "https://i.pravatar.cc/150?img=11"
+    avatar: "/images/avatar-2.webp"
   },
   {
     quote: "The hardscaping team transformed our backyard into a stunning entertainment space. Highly recommend their expertise to anyone looking to upgrade.",
     name: "Elena Rodriguez",
     location: "Highland Estates",
-    avatar: "https://i.pravatar.cc/150?img=5"
+    avatar: "/images/avatar-3.webp"
   }
 ];
 
@@ -95,7 +95,7 @@ export const PORTFOLIO_ITEMS = [
 export const LATEST_PROJECTS = [
   {
     id: "hero-estates",
-    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    img: '/images/latest-hero-estates.webp',
     title: 'HERO ESTATES',
     colSpan: 'sm:col-span-2 lg:col-span-2',
     category: 'Commercial Landscaping',
@@ -106,7 +106,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "dlf-botanicals",
-    img: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=80',
+    img: '/images/latest-dlf-botanicals.webp',
     title: 'DLF BOTANICALS',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Botanical Garden',
@@ -117,7 +117,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "dhampur-gardens",
-    img: 'https://plus.unsplash.com/premium_photo-1661962494793-c686adb46619?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    img: '/images/latest-dhampur.webp',
     title: 'DHAMPUR GARDENS',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Estate Design',
@@ -128,7 +128,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "pioneer-urban",
-    img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80',
+    img: '/images/latest-pioneer.webp',
     title: 'PIONEER URBAN',
     colSpan: 'sm:col-span-2 lg:col-span-2',
     category: 'Urban Renewal',
@@ -139,7 +139,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "amway-greens",
-    img: 'https://images.unsplash.com/photo-1734079692147-c6fc9438a2d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    img: '/images/latest-amway.webp',
     title: 'AMWAY GREENS',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Corporate Campus',
@@ -150,7 +150,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "the-indian-garden",
-    img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+    img: '/images/latest-indian.webp',
     title: 'THE INDIAN GARDEN',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Heritage Restoration',
@@ -161,7 +161,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "sumadhura",
-    img: 'https://images.unsplash.com/photo-1681465766418-6474cfdcbb3c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    img: '/images/latest-sumadhura.webp',
     title: 'SUMADHURA',
     colSpan: 'sm:col-span-1 lg:col-span-1',
     category: 'Residential Complex',
@@ -172,7 +172,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "campari-group",
-    img: 'https://images.unsplash.com/photo-1645526629357-16bbd762c8d5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    img: '/images/latest-campari.webp',
     title: 'CAMPARI GROUP',
     colSpan: 'sm:col-span-1 lg:col-span-2',
     category: 'Commercial HQ',
@@ -183,7 +183,7 @@ export const LATEST_PROJECTS = [
   },
   {
     id: "verdant-vistas",
-    img: 'https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&q=80',
+    img: '/images/latest-verdant.webp',
     title: 'VERDANT VISTAS',
     colSpan: 'sm:col-span-2 lg:col-span-1',
     category: 'Master Planning',

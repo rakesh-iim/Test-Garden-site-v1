@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight, Palette, Sprout, Grid2X2, Leaf, ChevronRight, Trees, ChevronLeft, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
@@ -21,11 +21,11 @@ const Hero = () => {
 
   return (
     <header ref={ref} className="relative pt-20 overflow-hidden bg-surface-container-low min-h-[90vh] flex items-center">
-      <motion.div style={{ y }} className="absolute inset-0 z-0 scale-[1.2] origin-top">
+      <motion.div style={{ y }} className="absolute inset-0 z-0 scale-[1.2] origin-top will-change-transform">
         <img 
           src={IMAGES.hero} 
           alt="Lush garden" 
-          loading="lazy"
+          loading="eager"
           className="w-full h-full object-cover opacity-80 mix-blend-multiply"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-black/40" />
@@ -76,7 +76,7 @@ const Expertise = () => {
       color: "bg-primary-container/10",
       textColor: "text-primary-container",
       large: true,
-      image: "https://images.unsplash.com/photo-1600607688066-890987f18a86?auto=format&fit=crop&q=80"
+      image: "/images/service-terrace.webp"
     },
     {
       title: "Balcony Makeover",
@@ -86,7 +86,7 @@ const Expertise = () => {
       color: "bg-primary-container",
       textColor: "text-on-primary",
       theme: "magnetic",
-      image: "https://images.unsplash.com/photo-1589923158776-cb4485d99fd6?auto=format&fit=crop&q=80",
+      image: "/images/booking-bg.webp",
       decoration: "leaf"
     },
     {
@@ -105,7 +105,8 @@ const Expertise = () => {
       icon: Leaf,
       color: "bg-primary/10",
       textColor: "text-primary",
-      border: "border-t-4 border-primary"
+      border: "border-t-4 border-primary",
+      decoration: "grid"
     }
   ];
 
@@ -140,7 +141,7 @@ const Expertise = () => {
               hidden: { opacity: 0, y: 40, scale: 0.95 },
               visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } }
             }}
-            whileHover={{ y: -8, scale: 1.02, transition: { type: "spring", stiffness: 400, damping: 25 } }}
+            whileHover={{ y: -8, transition: { type: "tween", duration: 0.25 } }}
             className={`
               ${s.large ? 'md:col-span-8' : i === 1 ? 'md:col-span-4' : 'md:col-span-6'}
               rounded-2xl p-8 ambient-shadow relative overflow-hidden group transition-colors duration-500
@@ -156,7 +157,7 @@ const Expertise = () => {
                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
             )}
             {(s as any).decoration === 'blob' && (
-               <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/20 rounded-full blur-[80px] group-hover:bg-primary/40 transition-colors duration-700"></div>
+               <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/20 rounded-full blur-[40px] group-hover:bg-primary/40 transition-colors duration-700"></div>
             )}
             {(s as any).decoration === 'leaf' && (
                <div className="absolute -bottom-8 -right-8 w-32 h-32 opacity-10 group-hover:opacity-20 transition-all duration-700 group-hover:-rotate-12 group-hover:scale-110 pointer-events-none">
@@ -283,7 +284,7 @@ export const Home = () => {
         <div className="bg-[#0b1612] text-white py-12 lg:py-24 relative overflow-hidden">
           {/* Background decorative elements */}
           <div className="absolute top-0 right-0 w-1/2 h-full bg-[#13261f] hidden lg:block rounded-l-[4rem]"></div>
-          <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+          <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[60px] pointer-events-none"></div>
 
           <div className="w-full max-w-[1600px] mx-auto px-6 lg:px-12 xl:px-24 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -339,7 +340,7 @@ export const Home = () => {
                  className="relative"
               >
                  {/* Decorative blob behind the form */}
-                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-primary-container/20 blur-[80px] rounded-full -z-10"></div>
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-primary-container/20 blur-[50px] rounded-full -z-10"></div>
                  
                  <ServiceBooking className="w-full lg:max-w-xl shadow-[0_8px_40px_rgba(0,0,0,0.2)] border-white/10 backdrop-blur-xl bg-surface/95 mx-0 lg:ml-auto" />
               </motion.div>

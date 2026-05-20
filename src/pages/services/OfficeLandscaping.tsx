@@ -40,7 +40,7 @@ export const OfficeLandscaping = () => {
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] flex items-end pb-24 overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80" alt="Office landscape" className="w-full h-full object-cover" />
+          <img src="/images/service-office.webp" alt="Office landscape" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
         </motion.div>
         

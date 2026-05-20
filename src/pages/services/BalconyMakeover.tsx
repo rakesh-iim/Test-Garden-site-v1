@@ -40,7 +40,7 @@ export const BalconyMakeover = () => {
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] flex items-end pb-24 overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1746553618662-2965b5a4ef8d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Luscious balcony design" className="w-full h-full object-cover" />
+          <img src="/images/service-balcony.webp" alt="Luscious balcony design" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10"></div>
         </motion.div>
         

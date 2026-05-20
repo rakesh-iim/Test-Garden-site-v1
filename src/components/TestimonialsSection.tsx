@@ -26,7 +26,8 @@ export const TestimonialsSection = () => {
     <div className="pt-24 pb-20 w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         className="mb-16"
       >
         <span className="inline-block bg-secondary/10 text-secondary font-bold px-4 py-1.5 rounded-full mb-6 tracking-wide uppercase">
@@ -69,10 +70,10 @@ export const TestimonialsSection = () => {
                 initial={(d: number) => ({ opacity: 0, x: d > 0 ? 50 : -50, scale: 0.95 })}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={(d: number) => ({ opacity: 0, x: d > 0 ? -50 : 50, scale: 0.95 })}
-                transition={{ duration: 0.5, type: 'spring', bounce: 0.3 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.8}
+                dragElastic={0.3}
                 onDragEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
                   if (swipe < -swipeConfidenceThreshold) {
