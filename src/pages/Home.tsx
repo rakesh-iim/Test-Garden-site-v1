@@ -96,7 +96,6 @@ const Expertise = () => {
       icon: Grid2X2,
       color: "bg-secondary-container/30",
       textColor: "text-on-secondary-container",
-      image: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
       decoration: "blob"
     },
     {
@@ -106,9 +105,7 @@ const Expertise = () => {
       icon: Leaf,
       color: "bg-primary/10",
       textColor: "text-primary",
-      border: "border-t-4 border-primary",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80",
-      decoration: "grid"
+      border: "border-t-4 border-primary"
     }
   ];
 
