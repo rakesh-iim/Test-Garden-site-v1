@@ -12,7 +12,10 @@ import { BackToTop } from './components/BackToTop';
 import { Home } from './pages/Home';
 import { AboutUs } from './pages/AboutUs';
 import { Services } from './pages/Services';
-import { ServiceDetail } from './pages/ServiceDetail';
+import { TerraceTransformation } from './pages/services/TerraceTransformation';
+import { BalconyMakeover } from './pages/services/BalconyMakeover';
+import { PenthouseTransformation } from './pages/services/PenthouseTransformation';
+import { OfficeLandscaping } from './pages/services/OfficeLandscaping';
 import { Gallery } from './pages/Gallery';
 import { GalleryDetail } from './pages/GalleryDetail';
 import { ContactUs } from './pages/ContactUs';
@@ -55,7 +58,10 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/services" element={<Services />} />
-              <Route path="/services/:serviceId" element={<ServiceDetail />} />
+              <Route path="/services/terrace-transformation" element={<TerraceTransformation />} />
+              <Route path="/services/balcony-makeover" element={<BalconyMakeover />} />
+              <Route path="/services/penthouse-transformation" element={<PenthouseTransformation />} />
+              <Route path="/services/office-landscaping" element={<OfficeLandscaping />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/gallery/:itemId" element={<GalleryDetail />} />
               <Route path="/projects" element={<Projects />} />
