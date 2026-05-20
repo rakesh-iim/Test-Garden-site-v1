@@ -77,7 +77,7 @@ export const Services = () => {
             className={`rounded-2xl overflow-hidden shadow-lg bg-surface-container-lowest text-on-surface group`}
           >
             {s.image && (
-              <Link to={`/services/${s.id}`} className="block h-48 w-full relative overflow-hidden">
+              <Link to={`/services/${s.id}`} className="block h-64 w-full relative overflow-hidden">
                 <img src={s.image} alt={s.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <span className="text-white font-bold tracking-wider uppercase text-sm border-2 border-white px-6 py-2 rounded-full backdrop-blur-md hover:bg-white hover:text-primary transition-colors">
@@ -86,29 +86,18 @@ export const Services = () => {
                 </div>
               </Link>
             )}
-            <div className="p-8">
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm ${s.color} ${s.textColor}`}>
-                <s.icon size={28} />
-              </div>
-              <h3 className={`text-3xl font-display font-bold mb-4 text-on-surface`}>
+            <div className="p-6 md:p-8">
+              <h3 className={`text-2xl font-display font-bold mb-3 text-on-surface`}>
                 <Link to={`/services/${s.id}`} className="hover:text-primary transition-colors">
                   {s.title}
                 </Link>
               </h3>
-              <p className={`text-lg leading-relaxed mb-6 text-on-surface-variant`}>{s.desc}</p>
+              <p className={`text-base leading-relaxed mb-6 text-on-surface-variant`}>{s.desc}</p>
               
-              <Link to={`/contact?service=${encodeURIComponent(s.title)}`} className="inline-flex items-center gap-2 font-bold px-8 py-4 rounded-full transition-colors bg-primary-container text-on-primary hover-lift shadow-lg hover:shadow-xl mb-8">
-                Request a Quote
+              <Link to={`/contact?service=${encodeURIComponent(s.title)}`} className="relative overflow-hidden group/btn inline-flex flex-none items-center gap-2 font-bold px-6 py-3 rounded-full transition-transform duration-300 bg-primary-container text-on-primary shadow-sm hover:shadow-lg hover:scale-[1.03] hover:-translate-y-0.5">
+                <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
+                <span className="relative z-10 group-hover/btn:text-primary-container transition-colors duration-[0.5s]">Request a Quote</span>
               </Link>
-
-              <ul className="space-y-3">
-                {[1, 2, 3].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <CheckCircle2 size={20} className="text-primary-container" />
-                    <span className="text-on-surface-variant">Premium offering detail {item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </motion.div>
         ))}
