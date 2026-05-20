@@ -47,7 +47,7 @@ export const PenthouseTransformation = () => {
           >
             <button 
               onClick={() => navigate(-1)} 
-              className="group flex items-center gap-2 text-white/80 hover:text-white mb-6 font-bold uppercase tracking-widest text-sm transition-colors"
+              className="group flex items-center gap-2 text-white/80 hover:text-secondary-container mb-6 font-bold uppercase tracking-widest text-sm transition-colors"
             >
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               Go Back
