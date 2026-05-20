@@ -26,7 +26,7 @@ export const Navbar = () => {
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex gap-8 items-center">
+        <div className="hidden lg:flex gap-8 items-center">
           {navItems.map((item) => {
             const isActive = location.pathname + location.hash === item.path || (location.pathname === '/' && location.hash === '' && item.path === '/#home');
             return (
@@ -46,7 +46,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-primary" onClick={() => setIsOpen(!isOpen)}>
+        <button className="lg:hidden text-primary" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -58,7 +58,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-surface border-t border-surface-container-highest overflow-hidden"
+            className="lg:hidden bg-surface border-t border-surface-container-highest overflow-hidden"
           >
             <div className="flex flex-col p-6 gap-4">
               {navItems.map((item) => {
