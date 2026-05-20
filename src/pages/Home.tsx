@@ -85,7 +85,9 @@ const Expertise = () => {
       icon: Sprout,
       color: "bg-primary-container",
       textColor: "text-on-primary",
-      theme: "magnetic"
+      theme: "magnetic",
+      image: "https://images.unsplash.com/photo-1589923158776-cb4485d99fd6?auto=format&fit=crop&q=80",
+      decoration: "leaf"
     },
     {
       title: "Penthouse Transformation",
@@ -93,7 +95,9 @@ const Expertise = () => {
       desc: "Elevate your penthouse exteriors with luxury landscaping, incorporating architectural stonework, dynamic lighting, and elegant, wind-resilient flora.",
       icon: Grid2X2,
       color: "bg-secondary-container/30",
-      textColor: "text-on-secondary-container"
+      textColor: "text-on-secondary-container",
+      image: "https://images.unsplash.com/photo-1615875605825-5eb9bb5d52ac?auto=format&fit=crop&q=80",
+      decoration: "blob"
     },
     {
       title: "Office Landscaping",
@@ -102,7 +106,9 @@ const Expertise = () => {
       icon: Leaf,
       color: "bg-primary/10",
       textColor: "text-primary",
-      border: "border-t-4 border-primary"
+      border: "border-t-4 border-primary",
+      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80",
+      decoration: "grid"
     }
   ];
 
@@ -148,9 +154,24 @@ const Expertise = () => {
             {s.theme === 'magnetic' && (
               <span className="absolute inset-0 w-full h-full bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-[0.5s] ease-[cubic-bezier(0.8,0,0.2,1)] z-0"></span>
             )}
+            
+            {(s as any).decoration === 'grid' && (
+               <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+            )}
+            {(s as any).decoration === 'blob' && (
+               <div className="absolute -top-12 -right-12 w-64 h-64 bg-primary/20 rounded-full blur-[80px] group-hover:bg-primary/40 transition-colors duration-700"></div>
+            )}
+            {(s as any).decoration === 'leaf' && (
+               <div className="absolute -bottom-8 -right-8 w-32 h-32 opacity-10 group-hover:opacity-20 transition-all duration-700 group-hover:-rotate-12 group-hover:scale-110 pointer-events-none">
+                 <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" className="w-full h-full text-primary-container">
+                   <path d="M17.5,3 C17.5,3 22,7 22,13 C22,18 18.5,21.5 13.5,22 C8.5,22.5 2.5,17 2,12 C1.5,7 6,2.5 11.5,2 C15.5,1.5 17.5,3 17.5,3 Z" />
+                 </svg>
+               </div>
+            )}
+
             {s.image && (
-              <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                <img src={s.image} loading="lazy" alt="" className="w-full h-full object-cover" />
+              <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 group-hover:opacity-[0.14] transition-opacity duration-500 [mask-image:linear-gradient(to_left,white_0%,transparent_100%)]">
+                <img src={s.image} loading="lazy" alt="" className="w-full h-full object-cover object-right" />
               </div>
             )}
             <div className="relative z-10 flex flex-col justify-between h-full">
@@ -159,7 +180,9 @@ const Expertise = () => {
                   ${s.theme === 'dark' ? 'bg-white/20' : s.theme === 'magnetic' ? 'bg-white/20 group-hover:bg-primary-container/10 transition-colors duration-[0.5s]' : s.color} ${s.theme === 'magnetic' ? 'text-on-primary' : s.textColor}`}>
                   <s.icon className={`w-6 h-6 transform transition-transform duration-300 group-hover:scale-110 ${s.theme === 'magnetic' ? 'group-hover:text-primary-container transition-colors duration-[0.5s]' : ''}`} />
                 </div>
-                <h3 className={`text-2xl font-display font-bold mb-3 ${s.theme === 'dark' ? 'text-white' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-on-surface group-hover:text-primary transition-colors'}`}>{s.title}</h3>
+                <Link to={`/services/${s.id}`}>
+                  <h3 className={`text-2xl font-display font-bold mb-3 hover:underline ${s.theme === 'dark' ? 'text-white' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-on-surface group-hover:text-primary transition-colors'}`}>{s.title}</h3>
+                </Link>
                 <p className={`${s.theme === 'dark' ? 'text-white/80 group-hover:text-white transition-colors' : s.theme === 'magnetic' ? 'text-on-primary/90 group-hover:text-primary-container/90 transition-colors duration-[0.5s]' : 'text-on-surface-variant group-hover:text-on-surface transition-colors'} mb-6 leading-relaxed`}>
                   {s.desc}
                 </p>

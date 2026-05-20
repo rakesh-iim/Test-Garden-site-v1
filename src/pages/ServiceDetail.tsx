@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { IMAGES } from '../constants';
 import { CheckCircle2, ArrowLeft } from 'lucide-react';
@@ -70,6 +70,7 @@ export const SERVICES_DATA = {
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
+  const navigate = useNavigate();
   const service = serviceId ? SERVICES_DATA[serviceId as keyof typeof SERVICES_DATA] : null;
 
   if (!service) {
@@ -84,9 +85,9 @@ export const ServiceDetail = () => {
         {service.keywords && <meta name="keywords" content={service.keywords as string} />}
       </Helmet>
 
-      <Link to="/services" className="inline-flex items-center gap-2 text-primary font-medium hover:underline mb-8 hover:text-primary-container transition-colors">
-        <ArrowLeft size={20} /> Back to Services
-      </Link>
+      <button onClick={() => navigate(-1)} className="inline-flex items-center gap-2 text-primary font-medium hover:underline mb-8 hover:text-primary-container transition-colors">
+        <ArrowLeft size={20} /> Go back
+      </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <motion.div 

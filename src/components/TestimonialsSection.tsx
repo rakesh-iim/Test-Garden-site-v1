@@ -3,6 +3,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Trees, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TESTIMONIALS } from '../constants';
 
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};
+
 export const TestimonialsSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -65,7 +70,18 @@ export const TestimonialsSection = () => {
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={(d: number) => ({ opacity: 0, x: d > 0 ? -50 : 50, scale: 0.95 })}
                 transition={{ duration: 0.5, type: 'spring', bounce: 0.3 }}
-                className="flex flex-col h-full justify-between gap-6"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.8}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+                  if (swipe < -swipeConfidenceThreshold) {
+                    nextTestimonial();
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    prevTestimonial();
+                  }
+                }}
+                className="flex flex-col h-full justify-between gap-6 cursor-grab active:cursor-grabbing"
               >
                 <p className="text-xl md:text-2xl italic text-white/95 leading-relaxed font-serif">
                   "{TESTIMONIALS[currentTestimonial].quote}"
@@ -87,7 +103,7 @@ export const TestimonialsSection = () => {
           </div>
         </motion.div>
         
-        <div className="flex flex-col gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 -mx-6 px-6 md:mx-0 md:px-0 md:flex-col md:overflow-visible md:snap-none md:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {TESTIMONIALS.map((test, index) => (
              <motion.div
               key={index}
@@ -95,7 +111,7 @@ export const TestimonialsSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-black/5"
+              className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-black/5 min-w-[280px] snap-center shrink-0 w-[85vw] md:w-auto md:min-w-0 md:shrink"
             >
               <p className="text-on-surface-variant italic mb-4">"{test.quote}"</p>
               <div className="flex items-center gap-3">

@@ -15,12 +15,11 @@ interface ServiceBookingProps {
 }
 
 const CITIES = [
+  "Ahmedabad",
+  "Surat",
+  "Vadodara",
   "Bangalore",
-  "Hyderabad",
-  "Pune",
-  "Delhi/NCR",
-  "Mumbai",
-  "Chennai"
+  "Pune"
 ];
 
 const PROPERTY_TYPES = [
