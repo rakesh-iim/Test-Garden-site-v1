@@ -54,7 +54,7 @@ service cloud.firestore {
     match /resources/{resourceId} {
       // Publicly readable for the portfolio gallery
       allow get: if isValidId(resourceId);
-      allow list: if true; // No owner restriction since it's a completely public portfolio gallery
+      allow list: if request.query.limit != null && request.query.limit <= 50;
 
       // Only admins (simulated here as authenticated users if the app had auth) can create/update. 
       // Disabling public writes to prevent vandalism.

@@ -9,6 +9,7 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
+import { FloatingContact } from './components/FloatingContact';
 
 const Home = React.lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const AboutUs = React.lazy(() => import('./pages/AboutUs').then(module => ({ default: module.AboutUs })));
@@ -77,6 +78,7 @@ export default function App() {
           </main>
           <Footer />
           <BackToTop />
+          <FloatingContact />
         </div>
       </BrowserRouter>
     </HelmetProvider>

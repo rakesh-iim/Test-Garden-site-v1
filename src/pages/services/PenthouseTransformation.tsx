@@ -4,6 +4,8 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, CheckCircle2, ChevronRight, Wind, ShieldCheck, Gem, Sparkles, Droplets, Leaf, TreeDeciduous, TreePine } from 'lucide-react';
 import ServiceBooking from '../../components/ServiceBooking';
+import { HowItWorks } from '../../components/HowItWorks';
+import { ServiceTestimonials } from '../../components/ServiceTestimonials';
 
 export const PenthouseTransformation = () => {
   const navigate = useNavigate();
@@ -15,13 +17,6 @@ export const PenthouseTransformation = () => {
     { title: "Specimen Trees", desc: "Mature, architectural flora craned in for immediate impact.", icon: Wind },
     { title: "Bespoke Water Features", desc: "Sleek, integrated pools and reflection ponds.", icon: Droplets },
     { title: "Smart Automation", desc: "App-controlled lighting, heating, and irrigation.", icon: Sparkles },
-  ];
-  
-  const process = [
-    { step: "Architectural Collaboration", desc: "We work directly with your interior designer and structural engineer." },
-    { step: "Microclimate Curation", desc: "Selecting robust, wind-resistant flora capable of thriving at elevation." },
-    { step: "White-Glove Fabrication", desc: "Custom sourcing of premium Italian ceramics, lighting, and stonework." },
-    { step: "Zero-Defect Delivery", desc: "Meticulous installation with comprehensive site protection protocols." }
   ];
 
   return (
@@ -178,57 +173,9 @@ export const PenthouseTransformation = () => {
         </div>
       </section>
 
-      {/* Methodology Section */}
-      <section className="py-20 relative overflow-hidden bg-surface">
-        {/* Background Image Backdrop with Premium Transparency and Effects */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06] dark:opacity-[0.04] grayscale contrast-125 transition-all duration-500 pointer-events-none"
-          style={{ backgroundImage: `url('/images/service-penthouse.webp')` }}
-        />
-        {/* Soft Premium Gradients to fade image edges */}
-        <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-surface pointer-events-none" />
-        
-        {/* Ambient Radial Glows */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-secondary-container/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
-        
-        {/* Grid Overlay for Subtle Architectural Feel */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
-        
-        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-secondary-container font-bold tracking-widest uppercase text-sm mb-3 block">Methodology</span>
-              <h2 className="text-4xl md:text-5xl font-display font-bold text-on-surface">
-                Our Executive Process
-              </h2>
-            </div>
-            
-            <div className="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-secondary-container/5 before:via-secondary-container/20 before:to-secondary-container/5">
-              {process.map((step, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="relative flex items-center group"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-surface bg-secondary-container text-on-secondary-container font-bold shadow-lg shrink-0 z-10 transition-transform duration-500 group-hover:scale-125 group-hover:shadow-secondary-container/50 md:absolute md:left-1/2 md:-translate-x-1/2">
-                    {idx + 1}
-                  </div>
-                  <div className={`w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-6 rounded-[2rem] bg-surface-container-lowest shadow-md border border-black/5 dark:border-white/5 relative overflow-hidden ml-6 md:ml-0 group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 ${idx % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
-                    <div className="absolute -right-4 -bottom-4 text-6xl font-display font-black text-black/5 dark:text-white/5 group-hover:text-secondary-container/10 transition-colors duration-500">
-                      0{idx + 1}
-                    </div>
-                    <h4 className="text-xl font-bold text-on-surface mb-2 relative z-10">{step.step}</h4>
-                    <p className="text-on-surface-variant leading-relaxed relative z-10 text-base">{step.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowItWorks />
+      
+      <ServiceTestimonials />
 
       {/* Book Now Section */}
       <section id="book-now" className="relative py-24 bg-[#050505] overflow-hidden">

@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+firebase-applet-config.json
+firebase-blueprint.json
+.env.local
+.env.*.local
+temp-repo/
+lighthouse-report.json
+metadata.json
