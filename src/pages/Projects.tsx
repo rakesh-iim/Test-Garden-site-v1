@@ -54,7 +54,7 @@ export const Projects = () => {
               <p className="text-white/80 font-medium text-sm tracking-wider uppercase mb-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150">
                 {project.category}
               </p>
-              <h3 className="text-white font-display font-bold text-2xl md:text-3xl tracking-wide opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
+              <h3 className="text-white font-montserrat font-bold text-2xl md:text-3xl tracking-wide opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-75">
                 {project.title}
               </h3>
             </div>
