@@ -43,7 +43,7 @@ export const OfficeLandscaping = () => {
           >
             <button 
               onClick={() => navigate(-1)} 
-              className="group flex items-center gap-2 text-white/80 hover:text-[#3b82f6] mb-6 font-bold uppercase tracking-widest text-sm transition-colors"
+              className="group flex items-center gap-2 text-white/80 hover:text-primary mb-6 font-bold uppercase tracking-widest text-sm transition-colors"
             >
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               Go Back
@@ -51,11 +51,11 @@ export const OfficeLandscaping = () => {
             <div className="flex items-center gap-2 text-white/80 mb-6 text-sm font-bold uppercase tracking-widest">
               <Link to="/services" className="hover:text-white transition-colors">Services</Link>
               <ChevronRight size={14} />
-              <span className="text-[#3b82f6]">Office Landscaping</span>
+              <span className="text-primary">Office Landscaping</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-6">
               Green minds. <br/>
-              <span className="text-[#3b82f6] italic">Great work.</span>
+              <span className="text-primary italic">Great work.</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-medium max-w-2xl">
               Transform corporate campuses into vibrant hubs of productivity. We design low-maintenance green spaces that inspire collaboration.
@@ -66,7 +66,7 @@ export const OfficeLandscaping = () => {
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <a href="#book-now" className="inline-flex items-center gap-2 bg-[#3b82f6] text-white px-8 py-5 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group whitespace-nowrap">
+            <a href="#book-now" className="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-5 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group whitespace-nowrap">
               Partner With Us
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
@@ -85,7 +85,7 @@ export const OfficeLandscaping = () => {
               className="space-y-8"
             >
               <h2 className="text-4xl md:text-5xl font-display font-bold text-on-surface leading-tight">
-                Enhance Morale & <span className="text-[#3b82f6]">Productivity</span>
+                Enhance Morale & <span className="text-primary">Productivity</span>
               </h2>
               <p className="text-lg text-on-surface-variant leading-relaxed">
                 Modern workspaces require more than just desks and screens. Integrating biophilic design into corporate environments has been proven to reduce stress, improve air quality, and boost overall employee morale.
@@ -101,7 +101,7 @@ export const OfficeLandscaping = () => {
               className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl"
             >
               <img src="/images/latest-amway.webp" alt="Corporate courtyard landscaping" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#3b82f6]/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
             </motion.div>
           </div>
 
@@ -125,7 +125,7 @@ export const OfficeLandscaping = () => {
                   "Comprehensive maintenance plans tailored to commercial properties."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-on-surface-variant font-medium">
-                    <CheckCircle2 className="text-[#3b82f6] shrink-0 mt-1" size={20} />
+                    <CheckCircle2 className="text-primary shrink-0 mt-1" size={20} />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -162,8 +162,8 @@ export const OfficeLandscaping = () => {
                 transition={{ delay: i * 0.1 }}
                 className="group relative bg-surface p-8 rounded-[2rem] shadow-sm border border-black/5 dark:border-white/5 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#3b82f6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="w-14 h-14 rounded-2xl bg-[#3b82f6]/10 text-[#3b82f6] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <f.icon size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-on-surface mb-3 relative z-10">{f.title}</h3>
@@ -195,7 +195,7 @@ export const OfficeLandscaping = () => {
             >
               <h2 className="text-4xl md:text-5xl lg:text-[4rem] font-display font-bold text-white leading-tight">
                 Transform your <br />
-                <span className="text-[#3b82f6] italic">Corporate Campus.</span>
+                <span className="text-primary italic">Corporate Campus.</span>
               </h2>
               <p className="text-xl text-white/80 max-w-lg leading-relaxed">
                 Partner with us to create a landscape that reflects your brand's excellence and commitment to sustainability.

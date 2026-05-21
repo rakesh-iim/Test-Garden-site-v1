@@ -44,7 +44,7 @@ export const BalconyMakeover = () => {
           >
             <button 
               onClick={() => navigate(-1)} 
-              className="group flex items-center gap-2 text-white/80 hover:text-secondary mb-6 font-bold uppercase tracking-widest text-sm transition-colors"
+              className="group flex items-center gap-2 text-white/80 hover:text-primary mb-6 font-bold uppercase tracking-widest text-sm transition-colors"
             >
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               Go Back
@@ -52,11 +52,11 @@ export const BalconyMakeover = () => {
             <div className="flex items-center gap-2 text-white/80 mb-6 text-sm font-bold uppercase tracking-widest">
               <Link to="/services" className="hover:text-white transition-colors">Services</Link>
               <ChevronRight size={14} />
-              <span className="text-secondary">Balcony Makeover</span>
+              <span className="text-primary">Balcony Makeover</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-[1.1] mb-6">
               Small spaces. <br/>
-              <span className="text-secondary italic">Infinite beauty.</span>
+              <span className="text-primary italic">Infinite beauty.</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-medium max-w-2xl">
               Turn your compact outdoor area into a lush, private sanctuary. We specialize in vertical designs that maximize space and tranquility.
@@ -67,7 +67,7 @@ export const BalconyMakeover = () => {
              animate={{ opacity: 1, scale: 1 }}
              transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <a href="#book-now" className="inline-flex items-center gap-2 bg-secondary text-surface px-8 py-5 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group whitespace-nowrap">
+            <a href="#book-now" className="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-5 rounded-full font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group whitespace-nowrap">
               Start Your Makeover
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
@@ -114,7 +114,7 @@ export const BalconyMakeover = () => {
               className="space-y-8 lg:pl-12"
             >
               <h2 className="text-4xl md:text-5xl font-display font-bold text-on-surface leading-tight">
-                Engineered for <span className="text-secondary">Urban Limits</span>
+                Engineered for <span className="text-primary">Urban Limits</span>
               </h2>
               <p className="text-lg text-on-surface-variant leading-relaxed">
                 Urban balconies come with unique challenges: strict weight limits, high winds, and unpredictable microclimates. Our engineering background ensures every design is safe and sustainable.
@@ -126,7 +126,7 @@ export const BalconyMakeover = () => {
                   "Self-contained drainage systems to protect your flooring and downstairs neighbors."
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-on-surface-variant font-medium">
-                    <CheckCircle2 className="text-secondary shrink-0 mt-1" size={20} />
+                    <CheckCircle2 className="text-primary shrink-0 mt-1" size={20} />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -139,7 +139,7 @@ export const BalconyMakeover = () => {
               className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl"
             >
               <img src="/images/project-3.webp" alt="Urban balcony engineering" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-bl from-secondary/20 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-bl from-primary/20 to-transparent"></div>
             </motion.div>
           </div>
         </div>
