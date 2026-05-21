@@ -16,6 +16,7 @@ export default defineConfig(({mode}) => {
       rollupOptions: {
         output: {
           manualChunks: {
+            // 'vendor-firebase': ['firebase/app', 'firebase/firestore', 'firebase/auth'], // Uncomment when adding Firebase back
             'vendor-motion': ['motion'],
           },
         },

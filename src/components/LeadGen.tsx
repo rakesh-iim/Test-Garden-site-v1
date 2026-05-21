@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useLocation } from 'react-router-dom';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+// import { db } from '../lib/firebase';
+// import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export const LeadGen = ({ simplified = false }) => {
   const location = useLocation();
@@ -91,6 +93,20 @@ export const LeadGen = ({ simplified = false }) => {
         });
       } else {
         console.warn('VITE_GOOGLE_SHEET_URL is not defined in the environment. Form submission skipped.');
+        
+        /* 
+        // Future Firebase Implementation:
+        const submission: any = {
+          name: payload.name,
+          email: payload.email,
+          createdAt: serverTimestamp()
+        };
+        if (payload.phone) submission.phone = payload.phone;
+        if (payload.message) submission.message = payload.message;
+        if (payload.service) submission.service = payload.service;
+        
+        await addDoc(collection(db, 'contact_submissions'), submission);
+        */
       }
       
       setStatus('success');

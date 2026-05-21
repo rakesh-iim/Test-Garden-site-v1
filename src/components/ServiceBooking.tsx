@@ -4,6 +4,8 @@ import {
   Calendar, MapPin, Home, CheckCircle2, ChevronRight, 
   Ruler, Clock, FileText, Leaf
 } from 'lucide-react';
+// import { db } from '../lib/firebase';
+// import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 interface ServiceBookingProps {
   onSuccess?: (data: any) => void;
@@ -113,6 +115,11 @@ export default function ServiceBooking({
           });
         } else {
           console.warn('VITE_GOOGLE_SHEET_URL is not defined in the environment. Form submission skipped.');
+          
+          /*
+          // Future Firebase Implementation:
+          await addDoc(collection(db, 'service_bookings'), payload);
+          */
         }
         
         setIsSubmitting(false);
