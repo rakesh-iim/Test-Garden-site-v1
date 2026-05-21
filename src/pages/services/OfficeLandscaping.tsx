@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, CheckCircle2, ChevronRight, Leaf, Users, Building, Droplets, Sun } from 'lucide-react';
+import { ArrowRight, ArrowLeft, CheckCircle2, ChevronRight, Leaf, Users, Building, Droplets, Sun, TreeDeciduous, TreePine } from 'lucide-react';
 import ServiceBooking from '../../components/ServiceBooking';
 
 export const OfficeLandscaping = () => {
@@ -34,7 +34,7 @@ export const OfficeLandscaping = () => {
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] flex items-end pb-24 overflow-hidden bg-black">
         <motion.div style={{ y: y1 }} className="absolute inset-0 z-0 opacity-80">
-          <img src="/images/service-office.webp" alt="Corporate office landscaping" className="w-full h-full object-cover" />
+          <img src="/images/service-office.webp" alt="Corporate office landscaping" fetchpriority="high" decoding="async" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10"></div>
         </motion.div>
         
@@ -104,7 +104,7 @@ export const OfficeLandscaping = () => {
               viewport={{ once: true, margin: "-100px" }}
               className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl"
             >
-              <img src="/images/latest-amway.webp" alt="Corporate courtyard landscaping" className="w-full h-full object-cover" />
+              <img src="/images/latest-amway.webp" alt="Corporate courtyard landscaping" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#3b82f6]/20 to-transparent"></div>
             </motion.div>
           </div>
@@ -141,7 +141,7 @@ export const OfficeLandscaping = () => {
               viewport={{ once: true, margin: "-100px" }}
               className="relative aspect-square md:aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl"
             >
-              <img src="/images/latest-campari.webp" alt="Sustainable corporate landscaping" className="w-full h-full object-cover" />
+              <img src="/images/latest-campari.webp" alt="Sustainable corporate landscaping" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-bl from-primary/20 to-transparent"></div>
             </motion.div>
           </div>
@@ -179,19 +179,32 @@ export const OfficeLandscaping = () => {
       </section>
 
       {/* Methodology Section */}
-      <section className="py-24 relative overflow-hidden bg-surface">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#3b82f6]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+      <section className="py-20 relative overflow-hidden bg-surface">
+        {/* Background Image Backdrop with Premium Transparency and Effects */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.06] dark:opacity-[0.04] grayscale contrast-125 transition-all duration-500 pointer-events-none"
+          style={{ backgroundImage: `url('/images/service-office.webp')` }}
+        />
+        {/* Soft Premium Gradients to fade image edges */}
+        <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-surface pointer-events-none" />
+        
+        {/* Ambient Radial Glows */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#3b82f6]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
+        
+        {/* Grid Overlay for Subtle Architectural Feel */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
         
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 xl:px-24 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-20">
+            <div className="text-center mb-12">
               <span className="text-[#3b82f6] font-bold tracking-widest uppercase text-sm mb-3 block">Methodology</span>
               <h2 className="text-4xl md:text-5xl font-display font-bold text-on-surface">
                 Our Corporate Process
               </h2>
             </div>
             
-            <div className="space-y-12 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-[#3b82f6]/5 before:via-[#3b82f6]/20 before:to-[#3b82f6]/5">
+            <div className="space-y-8 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-[#3b82f6]/5 before:via-[#3b82f6]/20 before:to-[#3b82f6]/5">
               {process.map((step, idx) => (
                 <motion.div 
                   key={idx}
@@ -203,12 +216,12 @@ export const OfficeLandscaping = () => {
                   <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-surface bg-[#3b82f6] text-white font-bold shadow-lg shrink-0 z-10 transition-transform duration-500 group-hover:scale-125 group-hover:shadow-[#3b82f6]/50 md:absolute md:left-1/2 md:-translate-x-1/2">
                     {idx + 1}
                   </div>
-                  <div className={`w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-8 rounded-[2rem] bg-surface-container-lowest shadow-md border border-black/5 dark:border-white/5 relative overflow-hidden ml-6 md:ml-0 group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 ${idx % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
-                    <div className="absolute -right-4 -bottom-4 text-8xl font-display font-black text-black/5 dark:text-white/5 group-hover:text-[#3b82f6]/10 transition-colors duration-500">
+                  <div className={`w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-6 rounded-[2rem] bg-surface-container-lowest shadow-md border border-black/5 dark:border-white/5 relative overflow-hidden ml-6 md:ml-0 group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 ${idx % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
+                    <div className="absolute -right-4 -bottom-4 text-6xl font-display font-black text-black/5 dark:text-white/5 group-hover:text-[#3b82f6]/10 transition-colors duration-500">
                       0{idx + 1}
                     </div>
-                    <h4 className="text-2xl font-bold text-on-surface mb-3 relative z-10">{step.step}</h4>
-                    <p className="text-on-surface-variant leading-relaxed relative z-10 text-lg">{step.desc}</p>
+                    <h4 className="text-xl font-bold text-on-surface mb-2 relative z-10">{step.step}</h4>
+                    <p className="text-on-surface-variant leading-relaxed relative z-10 text-base">{step.desc}</p>
                   </div>
                 </motion.div>
               ))}

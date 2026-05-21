@@ -47,7 +47,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="lg:hidden text-primary" onClick={() => setIsOpen(!isOpen)}>
+        <button className="lg:hidden text-primary" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle mobile menu">
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>

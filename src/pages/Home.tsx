@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { IMAGES, TESTIMONIALS } from '../constants';
 import { LandscapesInAction } from '../components/LandscapesInAction';
 import { TestimonialsSection } from '../components/TestimonialsSection';
-import ServiceBooking from '../components/ServiceBooking';
+const ServiceBooking = React.lazy(() => import('../components/ServiceBooking'));
 
 import { ClientMarquee } from '../components/ClientMarquee';
 import { StoreLocator } from '../components/StoreLocator';
@@ -26,6 +26,8 @@ const Hero = () => {
           src={IMAGES.hero} 
           alt="Lush garden" 
           loading="eager"
+          fetchpriority="high"
+          decoding="async"
           className="w-full h-full object-cover opacity-80 mix-blend-multiply"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-black/40" />
@@ -169,7 +171,7 @@ const Expertise = () => {
 
             {s.image && (
               <div className="absolute right-0 top-0 w-1/2 h-full opacity-10 group-hover:opacity-[0.14] transition-opacity duration-500 [mask-image:linear-gradient(to_left,white_0%,transparent_100%)]">
-                <img src={s.image} loading="lazy" alt="" className="w-full h-full object-cover object-right" />
+                <img src={s.image} loading="lazy" decoding="async" alt="" className="w-full h-full object-cover object-right" />
               </div>
             )}
             <div className="relative z-10 flex flex-col justify-between h-full">
@@ -322,7 +324,7 @@ export const Home = () => {
                 </div>
 
                 <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl aspect-[4/3] max-w-lg hidden md:block group">
-                   <img src={IMAGES.project1} alt="Landscaping transformation" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                   <img src={IMAGES.project1} alt="Landscaping transformation" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                    <div className="absolute bottom-8 left-8 right-8">
                       <p className="text-white font-medium text-lg lg:text-xl leading-snug">"The team completely transformed our space into a lush oasis. Best decision we've made."</p>
@@ -342,7 +344,9 @@ export const Home = () => {
                  {/* Decorative blob behind the form */}
                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-primary-container/20 blur-[50px] rounded-full -z-10"></div>
                  
-                 <ServiceBooking className="w-full lg:max-w-xl shadow-[0_8px_40px_rgba(0,0,0,0.2)] border-white/10 backdrop-blur-xl bg-surface/95 mx-0 lg:ml-auto" />
+                 <React.Suspense fallback={<div className="w-full lg:max-w-xl min-h-[400px] flex items-center justify-center bg-surface/95 rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.2)] border-white/10 backdrop-blur-xl mx-0 lg:ml-auto"><div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div></div>}>
+                   <ServiceBooking className="w-full lg:max-w-xl shadow-[0_8px_40px_rgba(0,0,0,0.2)] border-white/10 backdrop-blur-xl bg-surface/95 mx-0 lg:ml-auto" />
+                 </React.Suspense>
               </motion.div>
 
             </div>
