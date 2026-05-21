@@ -99,7 +99,7 @@ export default function ServiceBooking({
           notes: formData.notes,
           service: 'Expert Landscape Consultation',
           status: 'booked',
-          createdAt: serverTimestamp()
+          createdAt: new Date().toISOString()
         };
 
         const googleSheetUrl = (import.meta as any).env?.VITE_GOOGLE_SHEET_URL;
