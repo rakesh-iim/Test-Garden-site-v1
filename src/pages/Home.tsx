@@ -191,7 +191,7 @@ const Expertise = () => {
                 </p>
               </div>
               <Link to={`/services/${s.id}`} className={`relative group/learn inline-flex w-fit items-center gap-1 font-bold text-sm ${s.theme === 'dark' ? 'text-white hover:text-white/80' : s.theme === 'magnetic' ? 'text-on-primary group-hover:text-primary-container transition-colors duration-[0.5s]' : 'text-primary-container group-hover:text-primary'} group-hover:gap-2 transition-all`}>
-                Learn more <ArrowRight className="w-4 h-4" />
+                Learn more<span className="sr-only"> about {s.title}</span> <ArrowRight className="w-4 h-4" />
                 <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${s.theme === 'dark' ? 'bg-white' : s.theme === 'magnetic' ? 'bg-primary-container' : 'bg-primary'} origin-left scale-x-0 transition-transform duration-300 ease-out group-hover/learn:scale-x-100`}></span>
               </Link>
             </div>
